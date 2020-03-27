@@ -22,4 +22,9 @@
 #
 
 class Project < ApplicationRecord
+  enum adapter: [:postgresql, :mysql, :mssql]
+  belongs_to :user
+  belongs_to :company
+  has_many :tables
+  has_many :groups
 end

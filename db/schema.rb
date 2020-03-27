@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2020_03_27_141622) do
     t.bigint "table_id"
     t.string "name"
     t.string "comment"
+    t.boolean "nullable", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["table_id"], name: "index_columns_on_table_id"
@@ -83,6 +84,7 @@ ActiveRecord::Schema.define(version: 2020_03_27_141622) do
     t.string "schema", default: "public"
     t.string "table_type", default: "table", comment: "table or view or mv"
     t.bigint "group_id"
+    t.bigint "primary_keys", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_tables_on_group_id"

@@ -20,4 +20,6 @@
 
 class User < ApplicationRecord
   belongs_to :company
+  has_many :groups
+  has_many :projects
 end

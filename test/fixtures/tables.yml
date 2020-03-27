@@ -5,6 +5,7 @@
 #  id                              :bigint           not null, primary key
 #  comment                         :string
 #  name                            :string
+#  primary_keys                    :bigint           default([]), is an Array
 #  schema                          :string           default("public")
 #  table_type(table or view or mv) :string           default("table")
 #  created_at                      :datetime         not null
