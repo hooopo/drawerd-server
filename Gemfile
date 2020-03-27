@@ -65,3 +65,5 @@ gem 'sprockets'
 gem 'sprockets-es6'
 
 gem 'pg'
+
+gem "devise", "~> 4.7"
