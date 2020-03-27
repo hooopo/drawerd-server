@@ -1,0 +1,2 @@
+class SqlFile < ApplicationRecord
+end
