@@ -2,12 +2,13 @@
 #
 # Table name: projects
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  company_id :bigint
-#  user_id    :bigint
+#  id                              :bigint           not null, primary key
+#  adapter(postgresql,mysql,mssql) :string           default("postgresql"), not null
+#  name                            :string
+#  created_at                      :datetime         not null
+#  updated_at                      :datetime         not null
+#  company_id                      :bigint
+#  user_id                         :bigint
 #
 # Indexes
 #

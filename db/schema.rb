@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2020_03_27_141622) do
   create_table "projects", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "company_id"
+    t.string "adapter", default: "postgresql", null: false, comment: "postgresql,mysql,mssql"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
