@@ -25,5 +25,12 @@ module StackRails
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    config.to_prepare do
+      Devise::SessionsController.layout "blank"
+      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "blank" }
+      Devise::ConfirmationsController.layout "blank"
+      Devise::UnlocksController.layout "blank"            
+      Devise::PasswordsController.layout "blank"        
+    end
   end
 end

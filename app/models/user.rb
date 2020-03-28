@@ -28,7 +28,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  belongs_to :company
+  belongs_to :company, optional: true
   has_many :groups
   has_many :projects
+
+  attr_accessor :company_name
+
+  before_create do 
+    self.company = create_company(uuid: SecureRandom.hex(6), name: company_name)
+  end
 end

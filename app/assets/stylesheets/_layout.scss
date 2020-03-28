@@ -113,3 +113,41 @@ body {
     margin-bottom: $grid-gutter-width;
   }
 }
+
+
+.layout-login-centered-boxed__form {
+    padding: 2rem;
+    position: relative;
+    min-width: calc(320px + 3rem * 2);
+    margin: 2rem 0;
+}
+
+.layout-login-centered-boxed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: initial;
+}
+
+.alert-soft-danger {
+    color: #dc3545;
+    background-color: rgba(220,53,69,0.05);
+    border-color: #f5c6cb;
+}
+
+.input-group.input-group-merge .field_with_errors {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 0;
+}
+
+.text-label, .text-label-large, .card-form__body label:not([class]) {
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: rgba(147,159,173,0.84);
+    line-height: .9375rem;
+    margin-bottom: .5rem;
+    font-weight: bold;
+}
