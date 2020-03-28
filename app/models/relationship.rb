@@ -23,7 +23,7 @@
 #
 
 class Relationship < ApplicationRecord
-  enum relation_type: [:one, :many]
+  enum relation_type: %w[one many].map { |name| [name, name] }.to_h
   belongs_to :table
   belongs_to :relation_table, class_name: 'Table'
 end

@@ -22,7 +22,8 @@
 #
 
 class Project < ApplicationRecord
-  enum adapter: [:postgresql, :mysql, :mssql]
+  enum adapter: %w[postgresql mysql mssql].map { |name| [name, name] }.to_h
+  validates :name, presence: true
   belongs_to :user
   belongs_to :company
   has_many :tables
