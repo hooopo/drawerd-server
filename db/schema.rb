@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_03_27_191823) do
   end
 
   create_table "relationships", force: :cascade do |t|
+    t.bigint "project_id"
     t.bigint "table_id"
     t.bigint "relation_table_id"
     t.string "relation_type", default: "many", comment: "many or one"
@@ -62,6 +63,7 @@ ActiveRecord::Schema.define(version: 2020_03_27_191823) do
     t.bigint "relation_table_key", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_relationships_on_project_id"
     t.index ["relation_table_id"], name: "index_relationships_on_relation_table_id"
     t.index ["table_id"], name: "index_relationships_on_table_id"
   end
@@ -110,6 +112,7 @@ ActiveRecord::Schema.define(version: 2020_03_27_191823) do
   add_foreign_key "groups", "users"
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users"
+  add_foreign_key "relationships", "projects"
   add_foreign_key "relationships", "tables"
   add_foreign_key "relationships", "tables", column: "relation_table_id"
   add_foreign_key "sql_files", "projects"

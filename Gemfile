@@ -66,3 +66,8 @@ gem 'sprockets-es6'
 gem 'pg'
 
 gem "devise", "~> 4.7"
+
+
+gem "ruby-graphviz", "~> 1.2", require: 'graphviz'
+
+gem "pry-rails", "~> 0.3.9"
