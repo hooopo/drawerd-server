@@ -24,4 +24,6 @@ class Group < ApplicationRecord
   belongs_to :project
   belongs_to :user
   has_many :tables
+  validates :name, presence: true
+  validates :name, uniqueness: { scope: :project_id }
 end

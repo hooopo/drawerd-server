@@ -1,5 +1,6 @@
 //** CORE
 //= require jquery/dist/jquery.min.js
+//= require jquery_ujs
 //= require popper.js/dist/umd/popper.js
 //= require bootstrap/dist/js/bootstrap.min.js
 

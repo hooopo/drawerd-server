@@ -1,3 +1,24 @@
-<div width='100%' class='svg-container'>
-  <object type="image/svg+xml" data="<%= render_svg_project_path(@project)%>" width="100%"></object>
-</div>
+
+  <div class="button-box float-right">
+    <%= link_to 'New Project', new_project_path, class: 'btn btn-primary' %>
+    <%= link_to 'New Group', "#", data: {toggle: "modal", target: "#new-group", remote: new_project_group_path(@project)}, class: 'btn btn-primary' %>
+
+
+  </div>
+  <div width='100%' class='svg-container'>
+    <object type="image/svg+xml" data="<%= render_svg_project_path(@project)%>" width="100%"></object>
+  </div>
+
+
+<% content_for :footer do %>
+  <!-- New Group Modal -->
+  <div id="new-group" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          Loading...
+        </div> <!-- // END .modal-body -->
+      </div> <!-- // END .modal-content -->
+    </div> <!-- // END .modal-dialog -->
+  </div> <!-- // END .modal -->
+<% end %>
