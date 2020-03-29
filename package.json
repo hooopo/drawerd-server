@@ -9,6 +9,7 @@
     "material-design-kit": "^1.0.0-alpha.24",
     "popper.js": "^1.12.5",
     "sidebar-style-guide": "^2.0.0",
-    "simplebar": "^3.1.1"
+    "simplebar": "^3.1.1",
+    "svg-pan-zoom": "^3.6.1"
   }
 }
