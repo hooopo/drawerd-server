@@ -29,4 +29,29 @@ class Table < ApplicationRecord
   belongs_to :project
   has_many :columns, dependent: :destroy
   has_many :relationships, dependent: :destroy
+
+  def to_html
+    <<~HTML
+      <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+        <TR>
+          <TD bgcolor='#ececfc' ALIGN="CENTER" colspan="3"><b>#{display_name}</b></TD>
+        </TR>
+        #{column_html }
+       </TABLE>>
+    HTML
+  end
+
+  def column_html
+    columns.map do |c|
+      c.to_html
+    end.join("\n")
+  end
+
+  def display_name
+    if schema == 'public'
+      name
+    else
+      [schema, name].join(".")
+    end
+  end
 end

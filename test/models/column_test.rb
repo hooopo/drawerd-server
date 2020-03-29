@@ -2,13 +2,14 @@
 #
 # Table name: columns
 #
-#  id         :bigint           not null, primary key
-#  comment    :string
-#  name       :string
-#  nullable   :boolean          default(TRUE)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  table_id   :bigint
+#  id          :bigint           not null, primary key
+#  column_type :string           default("string")
+#  comment     :string
+#  name        :string
+#  nullable    :boolean          default(TRUE)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  table_id    :bigint
 #
 # Indexes
 #

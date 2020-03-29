@@ -2,13 +2,14 @@
 #
 # Table name: columns
 #
-#  id         :bigint           not null, primary key
-#  comment    :string
-#  name       :string
-#  nullable   :boolean          default(TRUE)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  table_id   :bigint
+#  id          :bigint           not null, primary key
+#  column_type :string           default("string")
+#  comment     :string
+#  name        :string
+#  nullable    :boolean          default(TRUE)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  table_id    :bigint
 #
 # Indexes
 #
@@ -21,4 +22,14 @@
 
 class Column < ApplicationRecord
   belongs_to :table
+
+  def to_html
+    <<~HTML
+      <TR>
+        <TD bgcolor='green' ALIGN="LEFT">#{name}</TD>
+        <TD bgcolor='green' >#{column_type}</TD>
+        <TD bgcolor='green' ALIGN="RIGHT">[null, pk]</TD>
+      </TR>
+    HTML
+  end
 end
