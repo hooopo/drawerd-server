@@ -1,6 +1,7 @@
-.mdk-header {
+.mdk-header-layout > .mdk-header {
   margin-bottom: $spacer;
   height: auto;
+  position: initial;
 
   &__content {
     display: flex;
