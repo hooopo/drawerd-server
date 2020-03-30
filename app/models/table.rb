@@ -30,6 +30,9 @@ class Table < ApplicationRecord
   has_many :columns, dependent: :destroy
   has_many :relationships, dependent: :destroy
 
+  validates :name, uniqueness: { scope: :project_id }
+  validates :name, presence: true
+
   def to_html(mode = :full)
     <<~HTML
       <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">

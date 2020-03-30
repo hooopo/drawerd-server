@@ -22,8 +22,8 @@
         </div>
       </div>
     </div>
-    <%= link_to 'New Project', new_project_path, class: 'btn btn-primary' %>
-    <%= link_to 'New Group', "#", data: {toggle: "modal", target: "#new-group", remote: new_project_group_path(@project)}, class: 'btn btn-primary' %>
+    <%= link_to 'Add Table', "#", data: {toggle: "modal", target: "#new-table", remote: new_project_table_path(@project)}, class: 'btn btn-primary' %>
+    <%= link_to 'Add Group', "#", data: {toggle: "modal", target: "#new-group", remote: new_project_group_path(@project)}, class: 'btn btn-primary' %>
 
 
   </div>
@@ -36,6 +36,16 @@
 <% content_for :footer do %>
   <!-- New Group Modal -->
   <div id="new-group" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          Loading...
+        </div> <!-- // END .modal-body -->
+      </div> <!-- // END .modal-content -->
+    </div> <!-- // END .modal-dialog -->
+  </div> <!-- // END .modal -->
+
+  <div id="new-table" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body">
