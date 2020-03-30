@@ -2,23 +2,23 @@
   <div class="button-box float-right">
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
       <div class="btn-group" role="group">
-        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Layout
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-          <a class="dropdown-item" href="#">Fdp</a>
-          <a class="dropdown-item" href="#">Dot</a>
-          <a class="dropdown-item" href="#">Circo</a>
+          <%= link_to 'Fdp', project_path(params.permit(:mode, :layout).merge(layout: :fdp)), class: 'dropdown-item' %>
+          <%= link_to 'Crico', project_path(params.permit(:mode, :layout).merge(layout: :circo)), class: 'dropdown-item' %>
+          <%= link_to 'Dot', project_path(params.permit(:mode, :layout).merge(layout: :dot)), class: 'dropdown-item' %>
         </div>
       </div>
 
       <div class="btn-group" role="group">
-        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Mode
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-          <a class="dropdown-item" href="#">Simple</a>
-          <a class="dropdown-item" href="#">Full</a>
+          <%= link_to 'Full', project_path(params.permit(:mode, :layout).merge(mode: :full)), class: 'dropdown-item' %>
+          <%= link_to 'Simple', project_path(params.permit(:mode, :layout).merge(mode: :simple)), class: 'dropdown-item' %>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
 
   </div>
   <div width='100%' class='svg-container'>
-    <object id='svg-object' type="image/svg+xml" data="<%= render_svg_project_path(@project)%>" width="98%"></object>
+    <object id='svg-object' type="image/svg+xml" data="<%= render_svg_project_path(@project, params.permit(:mode, :layout))%>" width="98%"></object>
 
   </div>
 

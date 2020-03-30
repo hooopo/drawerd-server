@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
 
   def render_svg
     @project = current_user.company.projects.find(params[:id])
-    graph = @project.to_graph
+    graph = @project.to_graph(mode: params[:mode], layout: params[:layout])
     path = Rails.root.join("tmp", "#{@project.id}.svg")
     graph.output(svg: path)
     send_file path, type: 'image/svg+xml', disposition: "inline"

@@ -32,12 +32,14 @@ class Project < ApplicationRecord
 
   def to_graph(mode: :full, layout: :dot)
     #  "dot", "neato", "twopi", "fdp", "circo"
+    layout = %w[dot fdp circo].map { |item| [item, item.to_sym]  }.to_h[layout] || :dot
+    mode = %w[simple full].map { |item| [item, item.to_sym]  }.to_h[mode] || :full
     graph = GraphViz.new(name, rankdir: 'LR', size: '5,50', bgcolor: "#F7F8F9", :use => layout)
     table2nodes = {}
     tables.each do |table|
       table_node = graph.add_nodes(
         table.id.to_s, 
-        label: table.to_html, 
+        label: table.to_html(mode), 
         shape: :plaintext, 
         href: "javascript:alert(#{table.id})"
       )
@@ -50,8 +52,8 @@ class Project < ApplicationRecord
     graph
   end
 
-  def render_graph
-    graph = to_graph
+  def render_graph(mode: :full, layout: :dot)
+    graph = to_graph(mode: mode, layout: layout)
     path = Rails.root.join("tmp", "#{id}.svg")
     graph.output(svg: path)
     File.read(path)

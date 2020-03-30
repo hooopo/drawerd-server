@@ -30,13 +30,13 @@ class Table < ApplicationRecord
   has_many :columns, dependent: :destroy
   has_many :relationships, dependent: :destroy
 
-  def to_html
+  def to_html(mode = :full)
     <<~HTML
       <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
         <TR>
           <TD bgcolor='#ececfc' ALIGN="CENTER" colspan="3"><b>#{display_name}</b></TD>
         </TR>
-        #{column_html }
+        #{column_html if mode == :full }
        </TABLE>>
     HTML
   end
