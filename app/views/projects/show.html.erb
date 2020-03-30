@@ -1,5 +1,27 @@
 
   <div class="button-box float-right">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Layout
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <a class="dropdown-item" href="#">Fdp</a>
+          <a class="dropdown-item" href="#">Dot</a>
+          <a class="dropdown-item" href="#">Circo</a>
+        </div>
+      </div>
+
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Mode
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <a class="dropdown-item" href="#">Simple</a>
+          <a class="dropdown-item" href="#">Full</a>
+        </div>
+      </div>
+    </div>
     <%= link_to 'New Project', new_project_path, class: 'btn btn-primary' %>
     <%= link_to 'New Group', "#", data: {toggle: "modal", target: "#new-group", remote: new_project_group_path(@project)}, class: 'btn btn-primary' %>
 

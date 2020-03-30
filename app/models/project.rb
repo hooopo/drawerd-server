@@ -30,9 +30,9 @@ class Project < ApplicationRecord
   has_many :relationships
   has_many :groups
 
-  def to_graph
+  def to_graph(mode: :full, layout: :dot)
     #  "dot", "neato", "twopi", "fdp", "circo"
-    graph = GraphViz.new(name, rankdir: 'LR', size: '5,50', bgcolor: "#F7F8F9", :use => "fdp")
+    graph = GraphViz.new(name, rankdir: 'LR', size: '5,50', bgcolor: "#F7F8F9", :use => layout)
     table2nodes = {}
     tables.each do |table|
       table_node = graph.add_nodes(
