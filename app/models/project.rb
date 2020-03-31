@@ -34,20 +34,46 @@ class Project < ApplicationRecord
     #  "dot", "neato", "twopi", "fdp", "circo"
     layout = %w[dot fdp circo].map { |item| [item, item.to_sym]  }.to_h[layout] || :dot
     mode = %w[simple full].map { |item| [item, item.to_sym]  }.to_h[mode] || :full
-    graph = GraphViz.new(name, rankdir: 'LR', size: '5,50', bgcolor: "#F7F8F9", :use => layout)
+    graph = GraphViz.new(name, rankdir: 'LR', bgcolor: "#F7F8F9", :use => layout, compound: true)
+    graph.edge["lhead"] = ""
+    graph.edge["ltail"] = ""
     table2nodes = {}
-    tables.each do |table|
-      table_node = graph.add_nodes(
-        table.id.to_s, 
-        label: table.to_html(mode), 
-        shape: :plaintext, 
-        href: "javascript:alert(#{table.id})"
-      )
-      table2nodes[table.id] = table_node
+    tables.group_by { |t| t.group }.each do |group, tables|
+      
+      if group 
+        sub_graph = graph.add_graph("cluster#{group.id}", rankdir: "LR", bgcolor: "#F7F8F9", compound: true)
+        sub_graph[:label] = group.name
+        sub_graph[:style] = :dashed
+        tables.each do |table|
+          table_node = sub_graph.add_nodes(
+            table.id.to_s, 
+            label: table.to_html(mode), 
+            shape: :plaintext, 
+            href: "javascript:alert(#{table.id})"
+          )
+          table2nodes[table.id] = table_node
+        end
+      else
+        tables.each do |table|
+          table_node = graph.add_nodes(
+            table.id.to_s, 
+            label: table.to_html(mode), 
+            shape: :plaintext, 
+            href: "javascript:alert(#{table.id})"
+          )
+          table2nodes[table.id] = table_node
+        end
+      end
     end
 
+
     relationships.each do |rel|
-      graph.add_edges(table2nodes[rel.table_id], table2nodes[rel.relation_table_id], label: rel.relation_type, href: "javascript:alert(#{rel.id})")
+      graph.add_edges(
+        table2nodes[rel.table_id], 
+        table2nodes[rel.relation_table_id], 
+        label: rel.relation_type, 
+        href: "javascript:alert(#{rel.id})"
+      )
     end
     graph
   end
