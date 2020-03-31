@@ -73,6 +73,7 @@ GEM
     chromedriver-helper (2.1.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    cocoon (1.2.14)
     coderay (1.1.2)
     concurrent-ruby (1.1.4)
     crass (1.0.5)
@@ -226,6 +227,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   chromedriver-helper
+  cocoon
   devise (~> 4.7)
   jbuilder (~> 2.5)
   jquery-rails

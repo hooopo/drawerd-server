@@ -4,6 +4,7 @@
 //= require popper.js/dist/umd/popper.js
 //= require bootstrap/dist/js/bootstrap.min.js
 //= require svg-pan-zoom/dist/svg-pan-zoom.min.js
+//= require cocoon
 
 //= require simplebar/dist/simplebar.min.js
 

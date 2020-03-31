@@ -27,11 +27,12 @@
 class Table < ApplicationRecord
   belongs_to :group, optional: true
   belongs_to :project
-  has_many :columns, dependent: :destroy
+  has_many :columns, dependent: :destroy, inverse_of: :table
   has_many :relationships, dependent: :destroy
 
   validates :name, uniqueness: { scope: :project_id }
   validates :name, presence: true
+  accepts_nested_attributes_for :columns, reject_if: :all_blank, allow_destroy: true
 
   def to_html(mode = :full)
     <<~HTML

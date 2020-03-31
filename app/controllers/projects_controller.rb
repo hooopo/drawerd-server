@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
   end
 
   def render_svg
-    @project = current_user.company.projects.find(params[:id])
+    @project = current_user.company.projects.includes(:tables => :columns).find(params[:id])
     graph = @project.to_graph(mode: params[:mode], layout: params[:layout])
     path = Rails.root.join("tmp", "#{@project.id}.svg")
     graph.output(svg: path)
@@ -27,6 +27,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = current_user.company.projects.find(params[:id])
+    @project = current_user.company.projects.includes(:tables => :columns).find(params[:id])
   end
 end
