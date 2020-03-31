@@ -3,12 +3,26 @@
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
       <div class="btn-group" role="group">
         <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Group Filter
+        </button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <%= link_to "All", project_path(params.permit(:mode, :layout, :group_id).merge(group_id: nil)), class: 'dropdown-item' %>
+          <% @project.groups.each do |group| %>
+          <%= link_to group.name, project_path(params.permit(:mode, :layout, :group_id).merge(group_id: group.id)), class: 'dropdown-item' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Layout
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-          <%= link_to 'Fdp', project_path(params.permit(:mode, :layout).merge(layout: :fdp)), class: 'dropdown-item' %>
-          <%= link_to 'Crico', project_path(params.permit(:mode, :layout).merge(layout: :circo)), class: 'dropdown-item' %>
-          <%= link_to 'Dot', project_path(params.permit(:mode, :layout).merge(layout: :dot)), class: 'dropdown-item' %>
+          <%= link_to 'Fdp', project_path(params.permit(:mode, :layout, :group_id).merge(layout: :fdp)), class: 'dropdown-item' %>
+          <%= link_to 'Crico', project_path(params.permit(:mode, :layout, :group_id).merge(layout: :circo)), class: 'dropdown-item' %>
+          <%= link_to 'Dot', project_path(params.permit(:mode, :layout, :group_id).merge(layout: :dot)), class: 'dropdown-item' %>
         </div>
       </div>
 
@@ -17,8 +31,8 @@
           Mode
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-          <%= link_to 'Full', project_path(params.permit(:mode, :layout).merge(mode: :full)), class: 'dropdown-item' %>
-          <%= link_to 'Simple', project_path(params.permit(:mode, :layout).merge(mode: :simple)), class: 'dropdown-item' %>
+          <%= link_to 'Full', project_path(params.permit(:mode, :layout, :group_id).merge(mode: :full)), class: 'dropdown-item' %>
+          <%= link_to 'Simple', project_path(params.permit(:mode, :layout, :group_id).merge(mode: :simple)), class: 'dropdown-item' %>
         </div>
       </div>
     </div>
@@ -28,7 +42,7 @@
 
   </div>
   <div width='100%' class='svg-container'>
-    <object id='svg-object' type="image/svg+xml" data="<%= render_svg_project_path(@project, params.permit(:mode, :layout))%>" width="98%"></object>
+    <object id='svg-object' type="image/svg+xml" data="<%= render_svg_project_path(@project, params.permit(:mode, :layout, :group_id))%>" width="98%"></object>
 
   </div>
 

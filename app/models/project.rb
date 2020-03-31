@@ -30,16 +30,20 @@ class Project < ApplicationRecord
   has_many :relationships
   has_many :groups
 
-  def to_graph(mode: :full, layout: :dot)
+  def to_graph(mode: :full, layout: :dot, group_id: nil)
     #  "dot", "neato", "twopi", "fdp", "circo"
     layout = %w[dot fdp circo].map { |item| [item, item.to_sym]  }.to_h[layout] || :dot
     mode = %w[simple full].map { |item| [item, item.to_sym]  }.to_h[mode] || :full
     graph = GraphViz.new(name, rankdir: 'LR', bgcolor: "#F7F8F9", :use => layout, compound: true)
     graph.edge["lhead"] = ""
     graph.edge["ltail"] = ""
+    base_tables = if group_id.present?
+      tables.where(group_id: group_id)
+    else
+      tables
+    end
     table2nodes = {}
-    tables.group_by { |t| t.group }.each do |group, tables|
-      
+    base_tables.group_by { |t| t.group }.each do |group, tables|
       if group 
         sub_graph = graph.add_graph("cluster#{group.id}", rankdir: "LR", bgcolor: "#F7F8F9", compound: true)
         sub_graph[:label] = group.name
@@ -68,6 +72,7 @@ class Project < ApplicationRecord
 
 
     relationships.each do |rel|
+      next unless table2nodes[rel.table_id] && table2nodes[rel.relation_table_id]
       graph.add_edges(
         table2nodes[rel.table_id], 
         table2nodes[rel.relation_table_id], 
@@ -78,8 +83,8 @@ class Project < ApplicationRecord
     graph
   end
 
-  def render_graph(mode: :full, layout: :dot)
-    graph = to_graph(mode: mode, layout: layout)
+  def render_graph(mode: :full, layout: :dot, group_id: nil)
+    graph = to_graph(mode: mode, layout: layout, group_id: group_id)
     path = Rails.root.join("tmp", "#{id}.svg")
     graph.output(svg: path)
     File.read(path)
