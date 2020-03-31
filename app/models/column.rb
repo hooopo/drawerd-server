@@ -23,6 +23,22 @@
 class Column < ApplicationRecord
   belongs_to :table
 
+  TYPES = [
+    :string,
+    :text,
+    :integer,
+    :float,
+    :decimal,
+    :datetime,
+    :timestamp,
+    :time,
+    :date,
+    :binary,
+    :blob,
+    :boolean,
+    :json
+  ]
+
   def to_html
     <<~HTML
       <TR>
