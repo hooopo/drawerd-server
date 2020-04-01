@@ -33,6 +33,6 @@ class TablesController < ApplicationController
   end
 
   def table_params
-    params.require(:table).permit(:name, :comment, :group_id, columns_attributes: [:id, :name, :nullable, :column_type, :_destroy])
+    params.require(:table).permit(:name, :comment, :group_id, columns_attributes: [:id, :name, :nullable, :column_type, :comment, :_destroy])
   end
 end
