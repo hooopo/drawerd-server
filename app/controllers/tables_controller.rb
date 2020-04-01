@@ -15,7 +15,21 @@ class TablesController < ApplicationController
     else
       render :js => %Q|alert("#{@table.errors.full_messages.join(", ")}");|
     end
+  end
 
+  def edit
+    @project = current_user.company.projects.find(params[:project_id])
+    @table   = @project.tables.find(params[:id])
+  end
+
+  def update
+    @project = current_user.company.projects.find(params[:project_id])
+    @table   = @project.tables.find(params[:id])
+    if @table.update(table_params)
+      render :js => %Q|$('#edit-table').modal('toggle');$("#svg-object").attr("data", $("#svg-object").attr('data'));|
+    else
+      render :js => %Q|alert("#{@table.errors.full_messages.join(", ")}");|
+    end
   end
 
   def table_params

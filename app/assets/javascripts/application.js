@@ -3,6 +3,12 @@
 domFactory.handler.autoInit()
 
 
+function edit_table(url){
+  modal = $('#edit-table');
+  modal.find('.modal-body').load(url);
+  modal.modal("toggle");
+}
+
 
 $(document).ready(function(){
   if($('#svg-object').length){
@@ -13,11 +19,11 @@ $(document).ready(function(){
         controlIconsEnabled: true,
         zoomScaleSensitivity: 0.3,
         minZoom: 1,
-        maxZoom: 3
+        maxZoom: 3,
+        preventMouseEventsDefault: true
       });
     });
   }
-
 
   // ENABLE TOOLTIPS
   $('[data-toggle="tooltip"]').tooltip();

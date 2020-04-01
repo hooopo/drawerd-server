@@ -52,8 +52,8 @@ class Project < ApplicationRecord
           table_node = sub_graph.add_nodes(
             table.id.to_s, 
             label: table.to_html(mode), 
-            shape: :plaintext, 
-            href: "javascript:alert(#{table.id})"
+            shape: :plaintext,
+            href: "javascript:window.parent.edit_table('#{Rails.application.routes.url_helpers.edit_project_table_path(self, table)}');"
           )
           table2nodes[table.id] = table_node
         end
@@ -63,7 +63,7 @@ class Project < ApplicationRecord
             table.id.to_s, 
             label: table.to_html(mode), 
             shape: :plaintext, 
-            href: "javascript:alert(#{table.id})"
+            href: "javascript:window.parent.edit_table('#{Rails.application.routes.url_helpers.edit_project_table_path(self, table)}');"
           )
           table2nodes[table.id] = table_node
         end
