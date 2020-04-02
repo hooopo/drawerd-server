@@ -18,9 +18,13 @@
             <%= f.select :adapter, Project.adapters, {}, class: 'form-control' %>
           </div>
 
-          <div class="form-group">
-            <%= f.hidden_field :import_sql, value: @project.cached_import_sql_data %>
-            <%= f.file_field :import_sql %>
+          <div class='form-group'>
+            <%= f.label :import_sql %>
+            <div class="custom-file">
+              <%= f.label :import_sql, class: 'custom-file-label', value: 'Import from SQL file' %>
+              <%= f.hidden_field :import_sql, value: @project.cached_import_sql_data %>
+              <%= f.file_field :import_sql, class: 'custom-file-input' %>
+            </div>
           </div>
 
           <div class="form-group">
