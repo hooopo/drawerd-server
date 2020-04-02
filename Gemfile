@@ -73,3 +73,9 @@ gem "devise", "~> 4.7"
 gem "ruby-graphviz", "~> 1.2", require: 'graphviz'
 
 gem "pry-rails", "~> 0.3.9"
+
+gem "parslet", "~> 2.0"
+
+gem "pg_query", "~> 1.2"
+
+gem "shrine", "~> 3.2"

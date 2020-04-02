@@ -4,6 +4,7 @@
 #
 #  id                              :bigint           not null, primary key
 #  adapter(postgresql,mysql,mssql) :string           default("postgresql"), not null
+#  import_sql_data                 :jsonb
 #  name                            :string
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
@@ -29,6 +30,7 @@ class Project < ApplicationRecord
   has_many :tables
   has_many :relationships
   has_many :groups
+  include ImportSqlUploader::Attachment(:import_sql)
 
   def to_graph(mode: :full, layout: :dot, group_id: nil)
     #  "dot", "neato", "twopi", "fdp", "circo"

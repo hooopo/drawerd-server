@@ -4,6 +4,7 @@
 #
 #  id                              :bigint           not null, primary key
 #  adapter(postgresql,mysql,mssql) :string           default("postgresql"), not null
+#  import_sql_data                 :jsonb
 #  name                            :string
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null

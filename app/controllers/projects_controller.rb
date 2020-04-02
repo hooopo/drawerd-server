@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = current_user.projects.new(params.fetch(:project, {}).permit(:name, :adapter))
+    @project = current_user.projects.new(params.fetch(:project, {}).permit(:name, :adapter, :import_sql))
     @project.company = current_user.company
     if @project.save
       redirect_to project_path(@project), notice: 'success created'
