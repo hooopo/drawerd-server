@@ -1,14 +1,23 @@
-# == Schema Information
-#
-# Table name: relationships
+class FixRelationship < ActiveRecord::Migration[5.2]
+  def change
+    remove_column :relationships, :relation_table_key
+    remove_column :relationships, :table_key
+
+    add_column :relationships, :column_id, :bigint
+    add_foreign_key :relationships, :columns, column: :column_id
+
+    add_column :relationships, :relation_column_id, :bigint
+    add_foreign_key :relationships, :columns, column: :relation_column_id
+  end
+end
 #
 #  id                         :bigint           not null, primary key
+#  relation_table_key         :bigint           default([]), is an Array
 #  relation_type(many or one) :string           default("many")
+#  table_key                  :bigint           default([]), is an Array
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
-#  column_id                  :bigint
 #  project_id                 :bigint
-#  relation_column_id         :bigint
 #  relation_table_id          :bigint
 #  table_id                   :bigint
 #
@@ -20,21 +29,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (column_id => columns.id)
 #  fk_rails_...  (project_id => projects.id)
-#  fk_rails_...  (relation_column_id => columns.id)
 #  fk_rails_...  (relation_table_id => tables.id)
 #  fk_rails_...  (table_id => tables.id)
-#
-
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value

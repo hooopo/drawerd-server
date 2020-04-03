@@ -5,12 +5,12 @@
 # Table name: relationships
 #
 #  id                         :bigint           not null, primary key
-#  relation_table_key         :bigint           default([]), is an Array
 #  relation_type(many or one) :string           default("many")
-#  table_key                  :bigint           default([]), is an Array
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
+#  column_id                  :bigint
 #  project_id                 :bigint
+#  relation_column_id         :bigint
 #  relation_table_id          :bigint
 #  table_id                   :bigint
 #
@@ -22,7 +22,9 @@
 #
 # Foreign Keys
 #
+#  fk_rails_...  (column_id => columns.id)
 #  fk_rails_...  (project_id => projects.id)
+#  fk_rails_...  (relation_column_id => columns.id)
 #  fk_rails_...  (relation_table_id => tables.id)
 #  fk_rails_...  (table_id => tables.id)
 #

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_02_133804) do
+ActiveRecord::Schema.define(version: 2020_04_03_190515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,10 +61,10 @@ ActiveRecord::Schema.define(version: 2020_04_02_133804) do
     t.bigint "table_id"
     t.bigint "relation_table_id"
     t.string "relation_type", default: "many", comment: "many or one"
-    t.bigint "table_key", default: [], array: true
-    t.bigint "relation_table_key", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "column_id"
+    t.bigint "relation_column_id"
     t.index ["project_id"], name: "index_relationships_on_project_id"
     t.index ["relation_table_id"], name: "index_relationships_on_relation_table_id"
     t.index ["table_id"], name: "index_relationships_on_table_id"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2020_04_02_133804) do
     t.index ["project_id"], name: "index_tables_on_project_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", comment: "This is my table.", force: :cascade do |t|
     t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -114,6 +114,8 @@ ActiveRecord::Schema.define(version: 2020_04_02_133804) do
   add_foreign_key "groups", "users"
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users"
+  add_foreign_key "relationships", "columns"
+  add_foreign_key "relationships", "columns", column: "relation_column_id"
   add_foreign_key "relationships", "projects"
   add_foreign_key "relationships", "tables"
   add_foreign_key "relationships", "tables", column: "relation_table_id"
