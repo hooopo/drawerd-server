@@ -79,3 +79,5 @@ gem "parslet", "~> 2.0"
 gem "pg_query", "~> 1.2"
 
 gem "shrine", "~> 3.2"
+
+gem "dry-struct", "~> 1.3"
