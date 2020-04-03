@@ -86,3 +86,5 @@ gem "pg_query", "~> 1.2"
 gem "shrine", "~> 3.2"
 
 gem "dry-struct", "~> 1.3"
+
+gem "mysql-parser", "~> 0.0.3"

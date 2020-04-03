@@ -34,6 +34,19 @@ class Project < ApplicationRecord
   has_many :groups
   include ImportSqlUploader::Attachment(:import_sql)
 
+  after_create do
+    if postgresql?
+      if import_sql.present?
+        ddl = import_sql.download.read
+        DdlParsers::PgParser.new(ddl).tables.each do |parsed_table|
+          Table.import_from_ddl_parser(self, parsed_table)
+        end
+      end
+    else
+      # TODO
+    end
+  end
+
   def to_graph(mode: :full, layout: :dot, group_id: nil)
     #  "dot", "neato", "twopi", "fdp", "circo"
     layout = %w[dot fdp circo].map { |item| [item, item.to_sym]  }.to_h[layout] || :dot

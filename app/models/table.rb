@@ -36,6 +36,14 @@ class Table < ApplicationRecord
   validates :name, presence: true
   accepts_nested_attributes_for :columns, reject_if: :all_blank, allow_destroy: true
 
+  def self.import_from_ddl_parser(project, parsed_table)
+    this_table = project.tables.create(name: parsed_table.name, comment: parsed_table.comment)
+    parsed_table.columns.each do |column|
+      this_table.columns.create(name: column.name, comment: column.comment, column_type: column.column_type)
+    end
+    this_table
+  end
+
   def to_html(mode = :full)
     <<~HTML
       <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
