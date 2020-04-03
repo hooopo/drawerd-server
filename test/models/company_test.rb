@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: companies
@@ -13,7 +15,7 @@
 #  index_companies_on_uuid  (uuid) UNIQUE
 #
 
-require 'test_helper'
+require "test_helper"
 
 class CompanyTest < ActiveSupport::TestCase
   # test "the truth" do

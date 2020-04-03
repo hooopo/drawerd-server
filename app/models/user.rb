@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -34,7 +36,7 @@ class User < ApplicationRecord
 
   attr_accessor :company_name
 
-  before_create do 
+  before_create do
     self.company = create_company(uuid: SecureRandom.hex(6), name: company_name)
   end
 end

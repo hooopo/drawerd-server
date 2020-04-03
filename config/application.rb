@@ -1,10 +1,12 @@
-require_relative 'boot'
+# frozen_string_literal: true
 
-require 'rails/all'
+require_relative "boot"
+
+require "rails/all"
 
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
-require 'sprockets/es6'
+require "sprockets/es6"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -27,10 +29,10 @@ module DrawERD
     # the framework and any gems in your application.
     config.to_prepare do
       Devise::SessionsController.layout "blank"
-      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "blank" }
+      Devise::RegistrationsController.layout proc { |controller| user_signed_in? ? "application" : "blank" }
       Devise::ConfirmationsController.layout "blank"
-      Devise::UnlocksController.layout "blank"            
-      Devise::PasswordsController.layout "blank"        
+      Devise::UnlocksController.layout "blank"
+      Devise::PasswordsController.layout "blank"
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DdlParsers
   class MysqlParser < DdlParser
     attr_reader :parser

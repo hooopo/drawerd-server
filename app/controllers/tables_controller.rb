@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TablesController < ApplicationController
   layout false
   def new
@@ -11,9 +13,9 @@ class TablesController < ApplicationController
     @project = current_user.company.projects.find(params[:project_id])
     @table   = @project.tables.new(table_params)
     if @table.save
-      render :js => %Q|$('#new-table').modal('toggle');$("#svg-object").attr("data", $("#svg-object").attr('data'));|
+      render js: %Q|$('#new-table').modal('toggle');$("#svg-object").attr("data", $("#svg-object").attr('data'));|
     else
-      render :js => %Q|alert("#{@table.errors.full_messages.join(", ")}");|
+      render js: %Q|alert("#{@table.errors.full_messages.join(", ")}");|
     end
   end
 
@@ -26,9 +28,9 @@ class TablesController < ApplicationController
     @project = current_user.company.projects.find(params[:project_id])
     @table   = @project.tables.find(params[:id])
     if @table.update(table_params)
-      render :js => %Q|$('#edit-table').modal('toggle');$("#svg-object").attr("data", $("#svg-object").attr('data'));|
+      render js: %Q|$('#edit-table').modal('toggle');$("#svg-object").attr("data", $("#svg-object").attr('data'));|
     else
-      render :js => %Q|alert("#{@table.errors.full_messages.join(", ")}");|
+      render js: %Q|alert("#{@table.errors.full_messages.join(", ")}");|
     end
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tables
@@ -24,7 +26,7 @@
 #  fk_rails_...  (project_id => projects.id)
 #
 
-require 'test_helper'
+require "test_helper"
 
 class TableTest < ActiveSupport::TestCase
   # test "the truth" do

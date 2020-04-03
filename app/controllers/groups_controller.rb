@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GroupsController < ApplicationController
   layout false
   def new
@@ -10,9 +12,9 @@ class GroupsController < ApplicationController
     @group   = @project.groups.new(params.fetch(:group, {}).permit(:name))
     @group.user = current_user
     if @group.save
-      render :js => "$('#new-group').modal('toggle');"
+      render js: "$('#new-group').modal('toggle');"
     else
-      render :js => %Q|alert("#{@group.errors.full_messages.join(", ")}");|
+      render js: %Q|alert("#{@group.errors.full_messages.join(", ")}");|
     end
   end
 

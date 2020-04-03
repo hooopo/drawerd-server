@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: relationships
@@ -28,6 +30,6 @@
 class Relationship < ApplicationRecord
   enum relation_type: %w[one many].map { |name| [name, name] }.to_h
   belongs_to :table
-  belongs_to :relation_table, class_name: 'Table'
+  belongs_to :relation_table, class_name: "Table"
   belongs_to :project
 end

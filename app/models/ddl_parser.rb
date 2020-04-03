@@ -1,5 +1,6 @@
-class DdlParser
+# frozen_string_literal: true
 
+class DdlParser
   attr_reader :ddl
   def initialize(ddl)
     @ddl = ddl

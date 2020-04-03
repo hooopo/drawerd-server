@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: relationships
@@ -25,7 +27,7 @@
 #  fk_rails_...  (table_id => tables.id)
 #
 
-require 'test_helper'
+require "test_helper"
 
 class RelationshipTest < ActiveSupport::TestCase
   # test "the truth" do

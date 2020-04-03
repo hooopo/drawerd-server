@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tables
@@ -52,7 +54,7 @@ class Table < ApplicationRecord
   end
 
   def display_name
-    if schema == 'public'
+    if schema == "public"
       name
     else
       [schema, name].join(".")
