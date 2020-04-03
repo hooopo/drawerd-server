@@ -7,6 +7,7 @@
 #  id          :bigint           not null, primary key
 #  column_type :string           default("string")
 #  comment     :string
+#  is_pk       :boolean          default(FALSE)
 #  name        :string
 #  nullable    :boolean          default(TRUE)
 #  created_at  :datetime         not null
@@ -46,8 +47,21 @@ class Column < ApplicationRecord
       <TR>
         <TD bgcolor='green' ALIGN="LEFT">#{name}</TD>
         <TD bgcolor='green' >#{column_type}</TD>
-        <TD bgcolor='green' ALIGN="RIGHT">[null, pk]</TD>
+        <TD bgcolor='green' ALIGN="RIGHT">#{ext_info}</TD>
       </TR>
     HTML
+  end
+
+  def ext_info
+    null = if nullable
+      'null'
+    else
+      'not null'
+    end
+    pk = if is_pk
+      'pk'
+    end
+
+    "[#{[null, pk].compact.join(", ")}]"
   end
 end

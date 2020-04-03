@@ -5,6 +5,7 @@
 #  id          :bigint           not null, primary key
 #  column_type :string           default("string")
 #  comment     :string
+#  is_pk       :boolean          default(FALSE)
 #  name        :string
 #  nullable    :boolean          default(TRUE)
 #  created_at  :datetime         not null

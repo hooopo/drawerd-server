@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_190515) do
+ActiveRecord::Schema.define(version: 2020_04_03_212238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_04_03_190515) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "column_type", default: "string"
+    t.boolean "is_pk", default: false
     t.index ["table_id"], name: "index_columns_on_table_id"
   end
 
@@ -88,7 +89,6 @@ ActiveRecord::Schema.define(version: 2020_04_03_190515) do
     t.string "schema", default: "public"
     t.string "table_type", default: "table", comment: "table or view or mv"
     t.bigint "group_id"
-    t.bigint "primary_keys", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_tables_on_group_id"
