@@ -61,10 +61,11 @@ class Table < ApplicationRecord
   end
 
   def display_name
-    if schema == "public"
+    output = if schema == "public"
       name
     else
       [schema, name].join(".")
     end
+    [output, comment.presence].compact.join("/")
   end
 end
