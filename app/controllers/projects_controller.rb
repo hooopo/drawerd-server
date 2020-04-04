@@ -36,6 +36,6 @@ class ProjectsController < ApplicationController
     @project = current_user.company.projects.find(params[:id])
     @table   = @project.tables.find(params[:table_id])
     @columns = @table.columns
-    render json: {columns: @columns}
+    render json: { columns: @columns }
   end
 end

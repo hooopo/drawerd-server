@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class RelationshipsController < ApplicationController
   layout false
   def new
     @project = current_user.company.projects.find(params[:project_id])
-    @relationship   = @project.relationships.new
+    @relationship = @project.relationships.new
   end
 
   def edit
@@ -12,7 +14,7 @@ class RelationshipsController < ApplicationController
 
   def update
     @project = current_user.company.projects.find(params[:project_id])
-    @relationship   = @project.relationships.find(params[:id])
+    @relationship = @project.relationships.find(params[:id])
     if @relationship.update(rel_params)
       render js: %Q|$('#edit-relationship').modal('toggle');$("#svg-object").attr("data", $("#svg-object").attr('data'));|
     else
@@ -22,7 +24,7 @@ class RelationshipsController < ApplicationController
 
   def create
     @project = current_user.company.projects.find(params[:project_id])
-    @relationship   = @project.relationships.new(rel_params)
+    @relationship = @project.relationships.new(rel_params)
     if @relationship.save
       render js: %Q|$('#new-relationship').modal('toggle');$("#svg-object").attr("data", $("#svg-object").attr('data'));|
     else

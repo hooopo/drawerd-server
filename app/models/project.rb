@@ -47,6 +47,17 @@ class Project < ApplicationRecord
     end
   end
 
+  def node_attributes(table, mode)
+    base = {}
+    base = base.merge(label: table.to_html(mode))
+    base = base.merge(shape: :box) if mode == :simple
+    base = base.merge(shape: :plaintext) if mode == :full
+    base = base.merge(color: "green") if mode == :simple
+    base = base.merge(style: :filled) if mode == :simple
+    base = base.merge(href: "javascript:window.parent.edit_table('#{Rails.application.routes.url_helpers.edit_project_table_path(self, table)}');")
+    base
+  end
+
   def to_graph(mode: :full, layout: :dot, group_id: nil)
     #  "dot", "neato", "twopi", "fdp", "circo"
     layout = %w[dot fdp circo].map { |item| [item, item.to_sym]  }.to_h[layout] || :dot
@@ -54,6 +65,7 @@ class Project < ApplicationRecord
     graph = GraphViz.new(name, rankdir: "LR", bgcolor: "#F7F8F9", use: layout, compound: true)
     graph.edge["lhead"] = ""
     graph.edge["ltail"] = ""
+
     base_tables = if group_id.present?
       tables.where(group_id: group_id)
     else
@@ -68,9 +80,7 @@ class Project < ApplicationRecord
         tables.each do |table|
           table_node = sub_graph.add_nodes(
             table.id.to_s,
-            label: table.to_html(mode),
-            shape: :plaintext,
-            href: "javascript:window.parent.edit_table('#{Rails.application.routes.url_helpers.edit_project_table_path(self, table)}');"
+            node_attributes(table, mode)
           )
           table2nodes[table.id] = table_node
         end
@@ -78,9 +88,7 @@ class Project < ApplicationRecord
         tables.each do |table|
           table_node = graph.add_nodes(
             table.id.to_s,
-            label: table.to_html(mode),
-            shape: :plaintext,
-            href: "javascript:window.parent.edit_table('#{Rails.application.routes.url_helpers.edit_project_table_path(self, table)}');"
+            node_attributes(table, mode)
           )
           table2nodes[table.id] = table_node
         end

@@ -54,12 +54,12 @@ class Column < ApplicationRecord
 
   def ext_info
     null = if nullable
-      'null'
+      "null"
     else
-      'not null'
+      "not null"
     end
     pk = if is_pk
-      'pk'
+      "pk"
     end
 
     "[#{[null, pk].compact.join(", ")}]"
