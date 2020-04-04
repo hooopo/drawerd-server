@@ -39,4 +39,12 @@ class User < ApplicationRecord
   before_create do
     self.company = create_company(uuid: SecureRandom.hex(6), name: company_name)
   end
+
+  def username
+    email.split("@")[0]
+  end
+
+  def avatar_url
+    ["https://www.gravatar.com/avatar", Digest::MD5.hexdigest(email)].join("/")
+  end
 end

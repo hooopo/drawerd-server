@@ -1,0 +1,13 @@
+<li class="nav-item dropdown">
+  <a href="#account_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
+    <img src="<%= image_path(current_user.avatar_url) %>" class="rounded-circle" width="32" alt="Frontted">
+    <span class="ml-1 d-flex-inline">
+      <span class="text-light"><%= current_user.username %></span>
+    </span>
+  </a>
+  <div id="account_menu" class="dropdown-menu dropdown-menu-right">
+    <a class="dropdown-item" href="#"  onClick="alert('Available in PRO version!')" >Edit account</a>
+    <div class="dropdown-divider"></div>
+    <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item') %> 
+  </div>
+</li>
