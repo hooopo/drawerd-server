@@ -52,7 +52,7 @@ class Project < ApplicationRecord
     base = base.merge(label: table.to_html(mode))
     base = base.merge(shape: :box) if mode == :simple
     base = base.merge(shape: :plaintext) if mode == :full
-    base = base.merge(color: "green") if mode == :simple
+    base = base.merge(color: "#01f800") if mode == :simple
     base = base.merge(style: :filled) if mode == :simple
     base = base.merge(href: "javascript:window.parent.edit_table('#{Rails.application.routes.url_helpers.edit_project_table_path(self, table)}');")
     base

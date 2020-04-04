@@ -45,9 +45,9 @@ class Column < ApplicationRecord
   def to_html
     <<~HTML
       <TR>
-        <TD bgcolor='green' ALIGN="LEFT">#{name}</TD>
-        <TD bgcolor='green' >#{column_type}</TD>
-        <TD bgcolor='green' ALIGN="RIGHT">#{ext_info}</TD>
+        <TD bgcolor='#01f800' ALIGN="LEFT">#{name}</TD>
+        <TD bgcolor='#01f800' >#{column_type}</TD>
+        <TD bgcolor='#01f800' ALIGN="RIGHT">#{ext_info}</TD>
       </TR>
     HTML
   end
