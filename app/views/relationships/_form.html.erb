@@ -1,0 +1,62 @@
+<%= form_for([@project, @relationship], remote: true, authenticity_token: true) do |f| %>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <%= f.label :table %>
+      <%= f.select :table_id, @project.tables.map{|x| [x.name, x.id]}, {include_blank: true}, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-4">
+      <%= f.label :column %>
+      <%= f.select :column_id, f.object&.table&.columns&.map{|x| [x.name, x.id]} || {}, {include_blank: true}, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <%= f.label :relation_table %>
+      <%= f.select :relation_table_id, @project.tables.map{|x| [x.name, x.id]}, {include_blank: true}, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-4">
+      <%= f.label :relation_column %>
+      <%= f.select :relation_column_id, f.object&.relation_table&.columns&.map{|x| [x.name, x.id]} || {}, {include_blank: true}, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :relation_type %>
+    <%= f.select :relation_type, Relationship.relation_types, {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group float-right">
+    <%= f.submit 'Submit', class: 'btn btn-success', data: {disable_with: 'waiting...'} %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).on("change", "#relationship_table_id, #relationship_relation_table_id", function(){
+    var table_id = $(this).val();
+    if ($(this).attr('id') === 'relationship_table_id'){
+      var dom_column = $('#relationship_column_id')
+    } else {
+      var dom_column = $('#relationship_relation_column_id')
+    }
+    $.ajax({
+      url: "/projects/<%= @project.id %>/columns",
+      method: "GET",
+      dataType: "json",
+    data: {table_id: table_id},
+      error: function (xhr, status, error) {
+        console.error('AJAX Error: ' + status + error);
+      },
+      success: function (response) {
+        console.log(response);
+        var columns = response["columns"];
+        dom_column.empty();
+
+        //dom_column.append('<option>Select Column</option>');
+        for(var i=0; i< columns.length; i++){
+          dom_column.append('<option value="' + columns[i]["id"] + '">' + columns[i]["name"] + '</option>');
+        }
+      }
+    });
+  });
+</script>

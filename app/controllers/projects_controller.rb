@@ -31,4 +31,11 @@ class ProjectsController < ApplicationController
   def show
     @project = current_user.company.projects.includes({ tables: [:columns, :group] }).find(params[:id])
   end
+
+  def columns
+    @project = current_user.company.projects.find(params[:id])
+    @table   = @project.tables.find(params[:table_id])
+    @columns = @table.columns
+    render json: {columns: @columns}
+  end
 end

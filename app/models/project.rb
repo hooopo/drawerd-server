@@ -94,7 +94,7 @@ class Project < ApplicationRecord
         table2nodes[rel.table_id],
         table2nodes[rel.relation_table_id],
         label: rel.relation_type,
-        href: "javascript:alert(#{rel.id})"
+        href: "javascript:window.parent.edit_relationship('#{Rails.application.routes.url_helpers.edit_project_relationship_path(self, rel)}');"
       )
     end
     graph

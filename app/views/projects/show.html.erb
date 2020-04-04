@@ -38,6 +38,7 @@
     </div>
     
     <%= link_to 'Add Table', "#", data: {toggle: "modal", target: "#new-table", remote: new_project_table_path(@project)}, class: 'btn btn-primary' %>
+    <%= link_to 'Add Relationship', "#", data: {toggle: "modal", target: "#new-relationship", remote: new_project_relationship_path(@project)}, class: 'btn btn-primary' %>
     <%= link_to 'Add Group', "#", data: {toggle: "modal", target: "#new-group", remote: new_project_group_path(@project)}, class: 'btn btn-primary' %>
 
 
@@ -66,6 +67,41 @@
       <div class="modal-content">
         <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add Table</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+          Loading...
+        </div> <!-- // END .modal-body -->
+      </div> <!-- // END .modal-content -->
+    </div> <!-- // END .modal-dialog -->
+  </div> <!-- // END .modal -->
+
+
+  <div id="new-relationship" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Relationship</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+          Loading...
+        </div> <!-- // END .modal-body -->
+      </div> <!-- // END .modal-content -->
+    </div> <!-- // END .modal-dialog -->
+  </div> <!-- // END .modal -->
+
+  <div id="edit-relationship" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Relationship</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
