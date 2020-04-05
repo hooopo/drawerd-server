@@ -34,6 +34,13 @@ class TablesController < ApplicationController
     end
   end
 
+  def destroy
+    @project = current_user.company.projects.find(params[:project_id])
+    @table   = @project.tables.find(params[:id])
+    @table.destroy
+    render js: %Q|$('#edit-table').modal('toggle');$("#svg-object").attr("data", $("#svg-object").attr('data'));|
+  end
+
   def table_params
     params.require(:table).permit(:name, :comment, :group_id, columns_attributes: [:id, :name, :nullable, :column_type, :is_pk, :comment, :_destroy])
   end
