@@ -14,7 +14,7 @@ module DdlParsers
     def tables
       parser.parsetree.map { |x| x["CREATESTMT"] }.compact.map do |x|
         table_name = x.dig("relation", "RANGEVAR", "relname")
-        columns = x.dig("tableElts").reverse.map do |column|
+        columns = x.dig("tableElts").map do |column|
           column_name = column.dig("COLUMNDEF", "colname")
           Result::Column.new(
             name: column.dig("COLUMNDEF", "colname"),

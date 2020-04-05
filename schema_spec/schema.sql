@@ -89,7 +89,8 @@ CREATE TABLE columns (
     nullable boolean DEFAULT true,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    column_type character varying DEFAULT 'string'::character varying
+    column_type character varying DEFAULT 'string'::character varying,
+    is_pk boolean DEFAULT false
 );
 
 
@@ -245,10 +246,10 @@ CREATE TABLE relationships (
     table_id bigint,
     relation_table_id bigint,
     relation_type character varying DEFAULT 'many'::character varying,
-    table_key bigint[] DEFAULT '{}'::bigint[],
-    relation_table_key bigint[] DEFAULT '{}'::bigint[],
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    column_id bigint,
+    relation_column_id bigint
 );
 
 
@@ -343,7 +344,6 @@ CREATE TABLE tables (
     schema character varying DEFAULT 'public'::character varying,
     table_type character varying DEFAULT 'table'::character varying,
     group_id bigint,
-    primary_keys bigint[] DEFAULT '{}'::bigint[],
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -731,6 +731,14 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: relationships fk_rails_7edb3f615c; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY relationships
+    ADD CONSTRAINT fk_rails_7edb3f615c FOREIGN KEY (relation_column_id) REFERENCES columns(id);
+
+
+--
 -- Name: columns fk_rails_8dd6d1aa4d; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -752,6 +760,14 @@ ALTER TABLE ONLY relationships
 
 ALTER TABLE ONLY projects
     ADD CONSTRAINT fk_rails_b872a6760a FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: relationships fk_rails_d31c58270a; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY relationships
+    ADD CONSTRAINT fk_rails_d31c58270a FOREIGN KEY (column_id) REFERENCES columns(id);
 
 
 --

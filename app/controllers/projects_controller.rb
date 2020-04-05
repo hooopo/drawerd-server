@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
   def columns
     @project = current_user.company.projects.find(params[:id])
     @table   = @project.tables.find(params[:table_id])
-    @columns = @table.columns
+    @columns = @table.columns.order("id asc")
     render json: { columns: @columns }
   end
 end

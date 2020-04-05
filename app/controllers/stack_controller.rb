@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class StackController < ApplicationController
+  skip_before_action :authenticate_user!
   before_action :chat_var
   layout :stack_layout
   def index; end

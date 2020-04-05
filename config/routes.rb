@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  root to: "projects#index"
+  root to: "stack#index"
 
   resources :projects do
     member do
