@@ -41,14 +41,14 @@ module DdlParsers
 
     def primary_keys
       @primary_keys ||= parser.parsetree.map { |x| x["ALTER TABLE"] }.compact.map do |x|
-        cmds = x['cmds']
+        cmds = x["cmds"]
         next unless cmds
-        key = cmds.map do |cmd| 
-          contype = cmd.dig('ALTER TABLE CMD', 'def', 'CONSTRAINT', 'contype')
-          next unless contype == 'PRIMARY_KEY'
-          cmd.dig('ALTER TABLE CMD', 'def', 'CONSTRAINT', 'keys')
+        key = cmds.map do |cmd|
+          contype = cmd.dig("ALTER TABLE CMD", "def", "CONSTRAINT", "contype")
+          next unless contype == "PRIMARY_KEY"
+          cmd.dig("ALTER TABLE CMD", "def", "CONSTRAINT", "keys")
         end.compact.flatten.first
-        table_name = x.dig('relation', 'RANGEVAR', 'relname')
+        table_name = x.dig("relation", "RANGEVAR", "relname")
         [table_name, key] if key
       end.compact.to_h
     end
