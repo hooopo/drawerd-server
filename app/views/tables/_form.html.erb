@@ -27,7 +27,9 @@
   </div>
 
   <div class="form-group float-right">
-    <%= link_to 'Destroy', project_table_path(@project, @table), method: :delete, class: 'btn btn-secondary', data: {disable_with: 'waiting...'}, remote: true %>
+    <% if @table.persisted? %>
+      <%= link_to 'Destroy', project_table_path(@project, @table), method: :delete, class: 'btn btn-secondary', data: {disable_with: 'waiting...'}, remote: true %>
+    <% end %>
     <%= f.submit 'Submit', class: 'btn btn-success', data: {disable_with: 'waiting...', remote: true} %>
   </div>
 <% end %>
