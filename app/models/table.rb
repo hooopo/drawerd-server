@@ -59,7 +59,7 @@ class Table < ApplicationRecord
   end
 
   def column_html
-    columns.to_a.sort_by{|x| x.id}.map do |c|
+    columns.to_a.sort_by { |x| x.id }.map do |c|
       c.to_html
     end.join("\n")
   end
