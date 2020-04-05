@@ -28,6 +28,9 @@
     </div>
   </div>
   <div class="form-group float-right">
+    <% if @relationship.persisted? %>
+      <%= link_to 'Destroy', project_relationship_path(@project, @relationship), method: :delete, class: 'btn btn-secondary', data: {disable_with: 'waiting...'}, remote: true %>
+    <% end %>
     <%= f.submit 'Submit', class: 'btn btn-success', data: {disable_with: 'waiting...'} %>
   </div>
 <% end %>

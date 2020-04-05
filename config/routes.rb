@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
     resources :tables, only: [:new, :create, :destroy, :edit, :update]
     resources :groups, only: [:new, :create, :destroy]
-    resources :relationships, only: [:new, :create, :edit, :update]
+    resources :relationships, only: [:new, :create, :edit, :update, :destroy]
   end
   get ":page" => "stack#show", as: "stack"
 end

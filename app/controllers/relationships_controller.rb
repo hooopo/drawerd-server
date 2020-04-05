@@ -22,6 +22,13 @@ class RelationshipsController < ApplicationController
     end
   end
 
+  def destroy
+    @project = current_user.company.projects.find(params[:project_id])
+    @relationship = @project.relationships.find(params[:id])
+    @relationship.destroy
+    render js: %Q|$('#edit-relationship').modal('toggle');$("#svg-object").attr("data", $("#svg-object").attr('data'));|
+  end
+
   def create
     @project = current_user.company.projects.find(params[:project_id])
     @relationship = @project.relationships.new(rel_params)
@@ -30,11 +37,6 @@ class RelationshipsController < ApplicationController
     else
       render js: %Q|alert("#{@relationship.errors.full_messages.join(", ")}");|
     end
-  end
-
-  def destroy
-    @project = current_user.company.projects.find(params[:project_id])
-    @project.relationships.find(params[:id]).destroy
   end
 
   def rel_params
