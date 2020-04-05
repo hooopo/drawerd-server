@@ -38,8 +38,12 @@ class Project < ApplicationRecord
     if postgresql?
       if import_sql.present?
         ddl = import_sql.download.read
-        DdlParsers::PgParser.new(ddl).tables.each do |parsed_table|
+        parser = DdlParsers::PgParser.new(ddl)
+        parser.tables.each do |parsed_table|
           Table.import_from_ddl_parser(self, parsed_table)
+        end
+        parser.relationships.each do |parsed_relationship|
+          Relationship.import_from_ddl_parser(self, parsed_relationship)
         end
       end
     else

@@ -52,5 +52,21 @@ module DdlParsers
         [table_name, key] if key
       end.compact.to_h
     end
+
+    def relationships
+      @relationships ||= parser.parsetree.map { |x| x["ALTER TABLE"] }.compact.map do |x|
+        cmds = x["cmds"]
+        next unless cmds
+        cmds.map do |cmd|
+          pktable = cmd.dig("ALTER TABLE CMD", "def", "CONSTRAINT", "pktable")
+          next unless pktable
+          pktable_name = pktable.dig("RANGEVAR", "relname")
+          pkcolumn_name = cmd.dig("ALTER TABLE CMD", "def", "CONSTRAINT", "pk_attrs")[0].dig("STRING", "str")
+          fkcolumn_name = cmd.dig("ALTER TABLE CMD", "def", "CONSTRAINT", "fk_attrs")[0].dig("STRING", "str")
+          fktable_name = x.dig("relation", "RANGEVAR", "relname")
+          Result::Relationship.new(table: pktable_name, column: pkcolumn_name, relation_table: fktable_name, relation_column: fkcolumn_name)
+        end.compact.flatten.first
+      end.compact
+    end
   end
 end
