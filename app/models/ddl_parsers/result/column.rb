@@ -6,6 +6,7 @@ module DdlParsers
       attribute :name, Types::String
       attribute :comment, Types::String.optional
       attribute :column_type, Types::String
+      attribute :is_pk, Types::Bool
     end
   end
 end
