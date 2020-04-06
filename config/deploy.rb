@@ -11,7 +11,7 @@ set :assets_roles, [:app]
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/drawerd"
-set :rvm_ruby_versiion, '2.6.5'
+set :rvm_ruby_versiion, '2.6.2'
 
  set :puma_init_active_record, true
 
