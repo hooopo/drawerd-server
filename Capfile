@@ -12,8 +12,14 @@ require "capistrano/deploy"
 # require "capistrano/scm/svn"
 # install_plugin Capistrano::SCM::Svn
 # or
+require 'capistrano/rvm'
+require 'capistrano/yarn'
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
+
+require 'capistrano/puma'
+install_plugin Capistrano::Puma  # Default puma tasks
+install_plugin Capistrano::Puma::Nginx  # if you want to upload a nginx site template
 
 # Include tasks from other gems included in your Gemfile
 #

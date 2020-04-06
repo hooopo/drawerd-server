@@ -13,6 +13,8 @@ set :assets_roles, [:app]
 set :deploy_to, "/var/www/drawerd"
 set :rvm_ruby_versiion, '2.6.5'
 
+ set :puma_init_active_record, true
+
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
@@ -24,10 +26,10 @@ set :rvm_ruby_versiion, '2.6.5'
 # set :pty, true
 
 # Default value for :linked_files is []
-# append :linked_files, "config/database.yml", "config/secrets.yml"
+append :linked_files, ".env"
 
 # Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
