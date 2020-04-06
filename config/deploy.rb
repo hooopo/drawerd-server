@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # config valid only for current version of Capistrano
 lock "3.8.2"
 
@@ -11,9 +13,9 @@ set :assets_roles, [:app]
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/drawerd"
-set :rvm_ruby_versiion, '2.6.5'
+set :rvm_ruby_versiion, "2.6.5"
 
- set :puma_init_active_record, true
+set :puma_init_active_record, true
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -29,7 +31,7 @@ set :rvm_ruby_versiion, '2.6.5'
 append :linked_files, ".env"
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/uploads"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -38,4 +40,4 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # set :local_user, -> { `git config user.name`.chomp }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 5

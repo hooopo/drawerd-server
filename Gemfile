@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "dotenv-rails", "~> 2.7", require: 'dotenv/rails-now'
+gem "dotenv-rails", "~> 2.7", require: "dotenv/rails-now"
 gem "rails", "~> 5.2.2"
 
 # Use Puma as the app server
@@ -53,11 +53,11 @@ group :development do
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-performance", require: false
-  gem 'capistrano', '~> 3.8.2'
-  gem 'capistrano-rvm'
-  gem 'capistrano-rails','~> 1.1.0'
-  gem 'capistrano3-puma'
-  gem 'capistrano-yarn', require: false
+  gem "capistrano", "~> 3.8.2"
+  gem "capistrano-rvm"
+  gem "capistrano-rails", "~> 1.1.0"
+  gem "capistrano3-puma"
+  gem "capistrano-yarn", require: false
 end
 
 group :test do
