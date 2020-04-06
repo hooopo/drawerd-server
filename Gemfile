@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem "dotenv-rails", "~> 2.7", require: 'dotenv/rails-now'
 gem "rails", "~> 5.2.2"
 
 # Use Puma as the app server
