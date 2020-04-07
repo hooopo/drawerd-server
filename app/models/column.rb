@@ -46,7 +46,7 @@ class Column < ApplicationRecord
     <<~HTML
       <TR>
         <TD bgcolor='#01f800' ALIGN="LEFT">#{name}</TD>
-        <TD bgcolor='#01f800' >#{column_type}</TD>
+        <TD bgcolor='#01f800' ALIGN="LEFT">#{column_type}</TD>
         <TD bgcolor='#01f800' ALIGN="RIGHT">#{ext_info}</TD>
       </TR>
     HTML
