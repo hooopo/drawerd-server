@@ -30,7 +30,7 @@
 #
 
 class Relationship < ApplicationRecord
-  enum relation_type: %w[many one].map { |name| [name, name] }.to_h
+  enum relation_type: %w[many one m2m].map { |name| [name, name] }.to_h
   belongs_to :table
   belongs_to :column, optional: true
 
@@ -38,6 +38,10 @@ class Relationship < ApplicationRecord
   belongs_to :relation_column, class_name: "Column", optional: true
 
   belongs_to :project
+
+  def virtual?
+    not (column && relation_column)
+  end
 
   def self.import_from_ddl_parser(project, parsed_relationship)
     table = project.tables.where(name: parsed_relationship.table).first

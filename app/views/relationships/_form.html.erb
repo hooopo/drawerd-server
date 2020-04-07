@@ -6,7 +6,7 @@
     </div>
     <div class="form-group col-md-6">
       <%= f.label :column %>
-      <%= f.select :column_id, f.object&.table&.columns&.map{|x| [x.name, x.id]} || {}, {include_blank: true}, class: 'form-control' %>
+      <%= f.select :column_id, f.object&.table&.columns&.map{|x| [x.name, x.id]}&.append(["--",nil]) || {}, {}, class: 'form-control' %>
     </div>
   </div>
 
@@ -17,7 +17,7 @@
     </div>
     <div class="form-group col-md-6">
       <%= f.label :relation_column %>
-      <%= f.select :relation_column_id, f.object&.relation_table&.columns&.map{|x| [x.name, x.id]} || {}, {include_blank: true}, class: 'form-control' %>
+      <%= f.select :relation_column_id, f.object&.relation_table&.columns&.map{|x| [x.name, x.id]}&.append(["--", nil]) || {}, {}, class: 'form-control' %>
     </div>
   </div>
 
