@@ -2,6 +2,9 @@
 
 Rails.application.routes.draw do
   devise_for :users
+  authenticated :user do
+    root to: 'projects#index'
+  end
   root to: "home#index"
 
   resources :projects do
