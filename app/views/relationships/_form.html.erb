@@ -60,6 +60,11 @@
         for(var i=0; i< columns.length; i++){
           dom_column.append('<option value="' + columns[i]["id"] + '">' + columns[i]["name"] + '</option>');
         }
+
+        if (columns.length >= 1) {
+          dom_column.append('<option value="">--</option>');
+        }
+
       }
     });
   });

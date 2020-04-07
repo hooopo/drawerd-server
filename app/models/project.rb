@@ -102,10 +102,16 @@ class Project < ApplicationRecord
 
     relationships.each do |rel|
       next unless table2nodes[rel.table_id] && table2nodes[rel.relation_table_id]
+      edge_style = if rel.column && rel.relation_column
+        :normal
+      else
+        :dashed
+      end
       graph.add_edges(
         table2nodes[rel.table_id],
         table2nodes[rel.relation_table_id],
         label: rel.relation_type,
+        style: edge_style,
         href: "javascript:window.parent.edit_relationship('#{Rails.application.routes.url_helpers.edit_project_relationship_path(self, rel)}');"
       )
     end
