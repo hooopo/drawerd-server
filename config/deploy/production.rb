@@ -11,6 +11,9 @@ server "drawerd.com", user: "root", roles: %w{app db web}, my_property: :my_valu
 # server "db.example.com", user: "deploy", roles: %w{db}
 
 set :nginx_server_name, 'drawerd.com'
+set :nginx_use_ssl, true
+set :nginx_ssl_certificate, "/etc/letsencrypt/live/drawerd.com/fullchain.pem"
+set :nginx_ssl_certificate_key, "/etc/letsencrypt/live/drawerd.com/privkey.pem"
 
 # role-based syntax
 # ==================
