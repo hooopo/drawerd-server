@@ -2,9 +2,10 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  authenticated :user do
-    root to: 'projects#index'
+  constraints SubdomainRequired do
+    root to: 'projects#index', as: 'subdomain_root'
   end
+
   root to: "home#index"
 
   resources :projects do
@@ -17,5 +18,6 @@ Rails.application.routes.draw do
     resources :groups, only: [:new, :create, :destroy]
     resources :relationships, only: [:new, :create, :edit, :update, :destroy]
   end
+  post "redirect/go" => "redirect#go"
   get ":page" => "stack#show", as: "stack"
 end

@@ -3,9 +3,9 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="form-group">
-    <%= f.label :company_name, class: 'text-label' %>
+    <%= f.label :subdomain, class: 'text-label' %>
     <div class="input-group input-group-merge">
-      <%= f.text_field :company_name, autofocus: true, autocomplete: "company_name", class: "form-control form-control-prepended" %>
+      <%= f.text_field :subdomain, autofocus: true, autocomplete: "subdomain", class: "form-control form-control-prepended" %>
       
       <div class="input-group-prepend">
         <div class="input-group-text">

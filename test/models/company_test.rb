@@ -5,14 +5,9 @@
 # Table name: companies
 #
 #  id         :bigint           not null, primary key
-#  name       :string
-#  uuid       :string           not null
+#  subdomain  :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#
-# Indexes
-#
-#  index_companies_on_uuid  (uuid) UNIQUE
 #
 
 require "test_helper"

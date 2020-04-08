@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
+  before_action :redirect_to_subdomain
+  
   def index
     @projects = current_user.company.projects
   end
