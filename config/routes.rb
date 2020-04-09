@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
+  resources :sessions, only: [:new, :create]
+  delete "sign_out" => "sessions#destroy", as: :destroy_session
+  resources :registrations, only: [:new, :create]
   authenticated :user do
     root to: 'projects#index'
   end

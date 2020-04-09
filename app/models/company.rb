@@ -5,17 +5,25 @@
 # Table name: companies
 #
 #  id         :bigint           not null, primary key
-#  name       :string
-#  uuid       :string           not null
+#  subdomain  :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  owner_id   :bigint
 #
-# Indexes
+# Foreign Keys
 #
-#  index_companies_on_uuid  (uuid) UNIQUE
+#  fk_rails_...  (owner_id => users.id)
 #
 
 class Company < ApplicationRecord
   has_many :users, dependent: :destroy
   has_many :projects, dependent: :destroy
+
+  belongs_to :owner, class_name: 'User'
+
+  validates :subdomain, presence: true
+  validates_format_of :subdomain, :with => /\A[a-zA-Z0-9_-]*?\z/, :message => 'accepts only letters, numbers'
+  
+  validates_uniqueness_of :subdomain
+
 end
