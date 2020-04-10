@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class RegistrationsController < ApplicationController
-  layout 'blank'
+  layout "blank"
   skip_before_action :authenticate_user!
 
   def new
@@ -11,9 +13,10 @@ class RegistrationsController < ApplicationController
     @user = User.new(user_params)
     @user.company = @user.own_company
     if @user.save
-      redirect_to '/', notice: 'sign up success'
+      cookies.permanent[:remember_token] = @user.remember_token
+      redirect_to root_path, notice: "Sign up successed"
     else
-      flash.now[:notice] = 'sign fail'
+      flash.now[:notice] = "Sign up failed"
       render :new
     end
   end

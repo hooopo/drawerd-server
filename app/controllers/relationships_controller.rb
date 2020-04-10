@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class RelationshipsController < ApplicationController
+  before_action :redirect_to_subdomain
   layout false
+
   def new
     @project = current_user.company.projects.find(params[:project_id])
     @relationship = @project.relationships.new

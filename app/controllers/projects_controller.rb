@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
+  before_action :redirect_to_subdomain
+
   def index
     @projects = current_user.company.projects
   end
@@ -13,7 +15,7 @@ class ProjectsController < ApplicationController
     @project = current_user.projects.new(params.fetch(:project, {}).permit(:name, :adapter, :import_sql))
     @project.company = current_user.company
     if @project.save
-      redirect_to project_path(@project), notice: "success created"
+      redirect_to project_path(@project), notice: "Project successfully created"
     else
       flash.now[:notice] = "fail"
       render :new

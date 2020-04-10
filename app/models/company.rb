@@ -19,11 +19,10 @@ class Company < ApplicationRecord
   has_many :users, dependent: :destroy
   has_many :projects, dependent: :destroy
 
-  belongs_to :owner, class_name: 'User'
+  belongs_to :owner, class_name: "User"
 
   validates :subdomain, presence: true
-  validates_format_of :subdomain, :with => /\A[a-zA-Z0-9_-]*?\z/, :message => 'accepts only letters, numbers'
-  
-  validates_uniqueness_of :subdomain
+  validates_format_of :subdomain, with: /\A[a-zA-Z0-9_-]*?\z/, message: "accepts only letters, numbers"
 
+  validates_uniqueness_of :subdomain
 end
