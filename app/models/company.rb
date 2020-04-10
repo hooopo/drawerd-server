@@ -23,6 +23,6 @@ class Company < ApplicationRecord
 
   validates :subdomain, presence: true
   validates :subdomain, exclusion: { in: %w(www admin help wiki console), message: "%{value} is reserved." }
-  validates_format_of :subdomain, with: /\A[a-zA-Z0-9_-]*?\z/, message: "accepts only letters, numbers"
+  validates_format_of :subdomain, with: /\A[a-z0-9_-]*?\z/, message: "accepts only letters, numbers"
   validates_uniqueness_of :subdomain
 end
