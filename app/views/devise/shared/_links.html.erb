@@ -1,9 +1,9 @@
 <%- if controller_name != 'sessions' %>
-  <br /><%= link_to "Log in", new_session_path, class: 'btn btn-sm btn-info' %>
+  <br /><%= link_to "Log in", new_session_path, class: 'btn btn-sm btn-link' %>
 <% end %>
 
 <%- if controller_name != 'registrations' %>
-  <br /><%= link_to "Sign up", new_registration_url(host: default_host, only_path: false), class: 'btn btn-sm btn-info' %>
+  <%= link_to "Sign up", new_registration_url(host: default_host, only_path: false), class: 'btn btn-sm btn-link' %>
 <% end %>
 
-<br /><%= link_to "Help", "https://help.drawerd.com/", class: 'btn btn-sm btn-info' %>
+<%= link_to "Help", "https://help.drawerd.com/", class: 'btn btn-sm btn-link' %>
