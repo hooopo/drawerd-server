@@ -24,7 +24,7 @@ $(document).ready(function(){
         zoomEnabled: false,
         controlIconsEnabled: true,
         zoomScaleSensitivity: 0.3,
-        minZoom: 1,
+        minZoom: 0.5,
         maxZoom: 3,
         preventMouseEventsDefault: true
       });
