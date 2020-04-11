@@ -18,6 +18,7 @@
 class Company < ApplicationRecord
   has_many :users, dependent: :destroy
   has_many :projects, dependent: :destroy
+  has_many :invitations, dependent: :destroy
 
   belongs_to :owner, class_name: "User"
 

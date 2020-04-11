@@ -33,6 +33,7 @@ class User < ApplicationRecord
   has_many :groups
   has_many :projects
   has_one :own_company, foreign_key: :owner_id, class_name: "Company", inverse_of: :owner
+  has_many :invitations
   accepts_nested_attributes_for :own_company
 
   validates :email, uniqueness: { scope: :company_id, message: "should be uniqueness per company" }
@@ -48,6 +49,7 @@ class User < ApplicationRecord
   end
 
   attr_accessor :remember_me
+  attr_accessor :invite_token
 
   def remember_me
     true

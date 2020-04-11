@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_232732) do
+ActiveRecord::Schema.define(version: 2020_04_11_190210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,21 @@ ActiveRecord::Schema.define(version: 2020_04_09_232732) do
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_groups_on_project_id"
     t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.bigint "company_id"
+    t.bigint "user_id"
+    t.string "email", null: false
+    t.bigint "invitee_id"
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id", "email"], name: "index_invitations_on_company_id_and_email", unique: true
+    t.index ["company_id"], name: "index_invitations_on_company_id"
+    t.index ["invitee_id"], name: "index_invitations_on_invitee_id"
+    t.index ["token"], name: "index_invitations_on_token", unique: true
+    t.index ["user_id"], name: "index_invitations_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -113,6 +128,9 @@ ActiveRecord::Schema.define(version: 2020_04_09_232732) do
   add_foreign_key "companies", "users", column: "owner_id"
   add_foreign_key "groups", "projects"
   add_foreign_key "groups", "users"
+  add_foreign_key "invitations", "companies"
+  add_foreign_key "invitations", "users"
+  add_foreign_key "invitations", "users", column: "invitee_id"
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users"
   add_foreign_key "relationships", "columns"

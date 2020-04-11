@@ -47,7 +47,7 @@
     <div class="form-group">
       <%= f.label :subdomain, class: 'text-label' %>
       <div class="input-group input-group-merge">
-        <%= f.text_field :subdomain, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= f.text_field :subdomain, autofocus: true, autocomplete: "email", class: "form-control", value: params[:subdomain] %>
         <div class="input-group-append">
           <span class="input-group-text">.drawerd.com</span>
         </div>
