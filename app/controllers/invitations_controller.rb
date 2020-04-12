@@ -2,7 +2,7 @@ class InvitationsController < ApplicationController
   before_action :redirect_to_subdomain
 
   def new
-    @invitations = current_user.invitations
+    @invitations = current_company.invitations.to_a
     @invitation = current_user.invitations.new
   end
 
