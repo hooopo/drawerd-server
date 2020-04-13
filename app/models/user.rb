@@ -29,7 +29,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  belongs_to :company
+  belongs_to :company, touch: true
   has_many :groups
   has_many :projects
   has_one :own_company, foreign_key: :owner_id, class_name: "Company", inverse_of: :owner

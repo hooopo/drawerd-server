@@ -27,7 +27,7 @@
 
 class Table < ApplicationRecord
   belongs_to :group, optional: true
-  belongs_to :project
+  belongs_to :project, touch: true
   has_many :columns, dependent: :destroy, inverse_of: :table
   has_many :relationships, dependent: :destroy
 

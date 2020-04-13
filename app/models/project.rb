@@ -8,6 +8,7 @@
 #  adapter(postgresql,mysql,mssql) :string           default("postgresql"), not null
 #  import_sql_data                 :jsonb
 #  name                            :string
+#  share_key                       :string
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #  company_id                      :bigint
@@ -28,11 +29,15 @@ class Project < ApplicationRecord
   enum adapter: %w[postgresql mysql mssql].map { |name| [name, name] }.to_h
   validates :name, presence: true
   belongs_to :user
-  belongs_to :company
+  belongs_to :company, touch: true
   has_many :tables
   has_many :relationships
   has_many :groups
   include ImportSqlUploader::Attachment(:import_sql)
+
+  before_create do
+    self.share_key = SecureRandom.hex(15)
+  end
 
   after_create do
     if postgresql?

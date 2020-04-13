@@ -6,6 +6,7 @@
 #  adapter(postgresql,mysql,mssql) :string           default("postgresql"), not null
 #  import_sql_data                 :jsonb
 #  name                            :string
+#  share_key                       :string
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #  company_id                      :bigint

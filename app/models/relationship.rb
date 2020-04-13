@@ -31,13 +31,13 @@
 
 class Relationship < ApplicationRecord
   enum relation_type: %w[many one m2m].map { |name| [name, name] }.to_h
-  belongs_to :table
+  belongs_to :table, touch: true
   belongs_to :column, optional: true
 
   belongs_to :relation_table, class_name: "Table"
   belongs_to :relation_column, class_name: "Column", optional: true
 
-  belongs_to :project
+  belongs_to :project, touch: true
 
   def virtual?
     not (column && relation_column)
