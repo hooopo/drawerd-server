@@ -2,6 +2,7 @@
 
 class ProjectsController < ApplicationController
   before_action :redirect_to_subdomain
+  skip_before_action :authenticate_user!, only: [:render_svg]
 
   def index
     @projects = current_user.company.projects
