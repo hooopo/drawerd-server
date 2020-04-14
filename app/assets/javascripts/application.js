@@ -85,6 +85,7 @@ $(document).ready(function(){
     });
   }
 
+  var clipboard = new ClipboardJS('#copy_svg_link');
 
 
 });

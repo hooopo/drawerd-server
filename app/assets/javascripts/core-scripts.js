@@ -9,6 +9,7 @@
 //= require simplebar/dist/simplebar.min.js
 
 //= require dom-factory/dist/dom-factory.js
+//= require clipboard/dist/clipboard.min.js
 
 //** PLUGIN SCRIPTS (NODE_MODULES)
 // PRO ONLY

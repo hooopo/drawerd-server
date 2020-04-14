@@ -23,7 +23,11 @@ class ProjectsController < ApplicationController
   end
 
   def render_svg
-    @project = current_user.company.projects.includes({ tables: [:columns, :group], relationships: [:column, :relation_column] }).find(params[:id])
+    if params[:share_key].present?
+      @project = Project.where(share_key: params[:share_key]).includes({ tables: [:columns, :group], relationships: [:column, :relation_column] }).find(params[:id])
+    else
+      @project = current_user.company.projects.includes({ tables: [:columns, :group], relationships: [:column, :relation_column] }).find(params[:id])
+    end
     graph = @project.to_graph(mode: params[:mode], layout: params[:layout], group_id: params[:group_id])
     path = Rails.root.join("tmp", "#{@project.id}.svg")
     graph.output(svg: path)
