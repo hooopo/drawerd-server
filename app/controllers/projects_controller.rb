@@ -27,7 +27,11 @@ class ProjectsController < ApplicationController
     graph = @project.to_graph(mode: params[:mode], layout: params[:layout], group_id: params[:group_id])
     path = Rails.root.join("tmp", "#{@project.id}.svg")
     graph.output(svg: path)
-    send_file path, type: "image/svg+xml", disposition: "inline"
+    if params[:download].present?
+      send_file path, type: "image/svg+xml", filename: "#{@project.name}.svg"
+    else
+      send_file path, type: "image/svg+xml", disposition: "inline"
+    end
   end
 
   def show
