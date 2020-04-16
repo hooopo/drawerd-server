@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_12_224127) do
+ActiveRecord::Schema.define(version: 2020_04_15_095644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,33 @@ ActiveRecord::Schema.define(version: 2020_04_12_224127) do
     t.index ["user_id"], name: "index_invitations_on_user_id"
   end
 
+  create_table "items", primary_key: ["item_code", "item_name"], force: :cascade do |t|
+    t.integer "item_code", null: false
+    t.string "item_name", limit: 35, null: false
+    t.string "purchase_unit", limit: 10
+    t.string "sale_unit", limit: 10
+    t.decimal "purchase_price", precision: 10, scale: 2
+    t.decimal "sale_price", precision: 10, scale: 2
+  end
+
+  create_table "items_double_primary_keys", primary_key: ["item_code", "item_name"], force: :cascade do |t|
+    t.integer "item_code", null: false
+    t.string "item_name", limit: 35, null: false
+    t.string "purchase_unit", limit: 10
+    t.string "sale_unit", limit: 10
+    t.decimal "purchase_price", precision: 10, scale: 2
+    t.decimal "sale_price", precision: 10, scale: 2
+  end
+
+  create_table "orders", primary_key: "ord_no", id: :integer, default: nil, force: :cascade do |t|
+    t.date "ord_date"
+    t.integer "item_code"
+    t.string "item_name", limit: 35
+    t.string "item_grade", limit: 1
+    t.decimal "ord_qty"
+    t.decimal "ord_amount"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "company_id"
@@ -68,6 +95,8 @@ ActiveRecord::Schema.define(version: 2020_04_12_224127) do
     t.datetime "updated_at", null: false
     t.jsonb "import_sql_data"
     t.string "share_key"
+    t.jsonb "table_csv_data"
+    t.jsonb "relation_csv_data"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
@@ -132,6 +161,7 @@ ActiveRecord::Schema.define(version: 2020_04_12_224127) do
   add_foreign_key "invitations", "companies"
   add_foreign_key "invitations", "users"
   add_foreign_key "invitations", "users", column: "invitee_id"
+  add_foreign_key "orders", "items", column: "item_code", primary_key: "item_code", name: "orders_item_code_fkey"
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users"
   add_foreign_key "relationships", "columns"

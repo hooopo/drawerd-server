@@ -8,7 +8,9 @@
 #  adapter(postgresql,mysql,mssql) :string           default("postgresql"), not null
 #  import_sql_data                 :jsonb
 #  name                            :string
+#  relation_csv_data               :jsonb
 #  share_key                       :string
+#  table_csv_data                  :jsonb
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #  company_id                      :bigint
@@ -33,26 +35,44 @@ class Project < ApplicationRecord
   has_many :tables
   has_many :relationships
   has_many :groups
-  include ImportSqlUploader::Attachment(:import_sql)
+  include FileUploader::Attachment(:table_csv)
+  include FileUploader::Attachment(:relation_csv)
 
   before_create do
     self.share_key = SecureRandom.hex(15)
   end
 
   after_create do
-    if postgresql?
-      if import_sql.present?
-        ddl = import_sql.download.read
-        parser = DdlParsers::PgParser.new(ddl)
-        parser.tables.each do |parsed_table|
-          Table.import_from_ddl_parser(self, parsed_table)
-        end
-        parser.relationships.each do |parsed_relationship|
-          Relationship.import_from_ddl_parser(self, parsed_relationship)
-        end
+    if table_csv.present?
+      csv = table_csv.download.read
+      CSV.parse(csv, headers: true).each do |row|
+        table = self.tables.create_with(comment: row['table_comment']).find_or_create_by(schema: row['table_schema'], name: row['table_name'])
+        next if table.new_record?
+        column = table.columns.create_with(
+          column_type: row['column_type'], 
+          nullable: row['is_nullable'], 
+          is_pk: !!row['primary_key'],
+          comment: row['column_comment']
+        ).find_or_create_by(name: row['column_name'])
       end
-    else
-      # TODO
+    end
+
+    if relation_csv.present?
+      csv = relation_csv.download.read
+      CSV.parse(csv, headers: true).each do |row|
+        table = self.tables.where(name: row['table'], schema: row['schema']).first rescue binding.pry
+        column = table.columns.where(name: row['column']).first rescue binding.pry
+
+        relation_table = self.tables.where(name: row['relation_table'], schema: row['relation_table_schema']).first
+        relation_column = relation_table.columns.where(name: row['relation_column']).first
+
+        self.relationships.create(
+          table: table,
+          column: column,
+          relation_table: relation_table,
+          relation_column: relation_column
+        )
+      end
     end
   end
 

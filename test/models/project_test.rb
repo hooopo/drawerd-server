@@ -8,7 +8,9 @@
 #  adapter(postgresql,mysql,mssql) :string           default("postgresql"), not null
 #  import_sql_data                 :jsonb
 #  name                            :string
+#  relation_csv_data               :jsonb
 #  share_key                       :string
+#  table_csv_data                  :jsonb
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #  company_id                      :bigint

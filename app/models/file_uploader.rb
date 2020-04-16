@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class ImportSqlUploader < Shrine
+class FileUploader < Shrine
   # plugins and uploading logic
 end

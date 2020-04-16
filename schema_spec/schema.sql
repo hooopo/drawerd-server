@@ -15,15 +15,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: hi; Type: SCHEMA; Schema: -; Owner: hooopo
---
-
-CREATE SCHEMA hi;
-
-
-ALTER SCHEMA hi OWNER TO hooopo;
-
---
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -37,31 +28,11 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
-SET search_path = hi, pg_catalog;
+SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
-
---
--- Name: hello; Type: TABLE; Schema: hi; Owner: hooopo
---
-
-CREATE TABLE hello (
-    id integer
-);
-
-
-ALTER TABLE hello OWNER TO hooopo;
-
---
--- Name: TABLE hello; Type: COMMENT; Schema: hi; Owner: hooopo
---
-
-COMMENT ON TABLE hello IS 'This is my hi.';
-
-
-SET search_path = public, pg_catalog;
 
 --
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: postgres
@@ -123,10 +94,10 @@ ALTER SEQUENCE columns_id_seq OWNED BY columns.id;
 
 CREATE TABLE companies (
     id bigint NOT NULL,
-    name character varying,
-    uuid character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    subdomain character varying,
+    owner_id bigint
 );
 
 
@@ -191,6 +162,94 @@ ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
 
 
 --
+-- Name: invitations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE invitations (
+    id bigint NOT NULL,
+    company_id bigint,
+    user_id bigint,
+    email character varying NOT NULL,
+    invitee_id bigint,
+    token character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE invitations OWNER TO postgres;
+
+--
+-- Name: invitations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE invitations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE invitations_id_seq OWNER TO postgres;
+
+--
+-- Name: invitations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE invitations_id_seq OWNED BY invitations.id;
+
+
+--
+-- Name: items; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE items (
+    item_code integer NOT NULL,
+    item_name character(35) NOT NULL,
+    purchase_unit character(10),
+    sale_unit character(10),
+    purchase_price numeric(10,2),
+    sale_price numeric(10,2)
+);
+
+
+ALTER TABLE items OWNER TO postgres;
+
+--
+-- Name: items_double_primary_keys; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE items_double_primary_keys (
+    item_code integer NOT NULL,
+    item_name character(35) NOT NULL,
+    purchase_unit character(10),
+    sale_unit character(10),
+    purchase_price numeric(10,2),
+    sale_price numeric(10,2)
+);
+
+
+ALTER TABLE items_double_primary_keys OWNER TO postgres;
+
+--
+-- Name: orders; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE orders (
+    ord_no integer NOT NULL,
+    ord_date date,
+    item_code integer,
+    item_name character(35),
+    item_grade character(1),
+    ord_qty numeric,
+    ord_amount numeric
+);
+
+
+ALTER TABLE orders OWNER TO postgres;
+
+--
 -- Name: projects; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -202,7 +261,8 @@ CREATE TABLE projects (
     name character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    import_sql_data jsonb
+    import_sql_data jsonb,
+    share_key character varying
 );
 
 
@@ -389,21 +449,15 @@ CREATE TABLE users (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    password_digest character varying DEFAULT ''::character varying NOT NULL,
     reset_password_token character varying,
     reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone
+    remember_created_at timestamp without time zone,
+    remember_token character varying
 );
 
 
 ALTER TABLE users OWNER TO postgres;
-
---
--- Name: TABLE users; Type: COMMENT; Schema: public; Owner: postgres
---
-
-COMMENT ON TABLE users IS 'This is my table.';
-
 
 --
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -445,6 +499,13 @@ ALTER TABLE ONLY companies ALTER COLUMN id SET DEFAULT nextval('companies_id_seq
 --
 
 ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('groups_id_seq'::regclass);
+
+
+--
+-- Name: invitations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY invitations ALTER COLUMN id SET DEFAULT nextval('invitations_id_seq'::regclass);
 
 
 --
@@ -515,6 +576,38 @@ ALTER TABLE ONLY groups
 
 
 --
+-- Name: invitations invitations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY invitations
+    ADD CONSTRAINT invitations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: items_double_primary_keys items_double_primary_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY items_double_primary_keys
+    ADD CONSTRAINT items_double_primary_keys_pkey PRIMARY KEY (item_code, item_name);
+
+
+--
+-- Name: items items_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY items
+    ADD CONSTRAINT items_pkey PRIMARY KEY (item_code, item_name);
+
+
+--
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (ord_no);
+
+
+--
 -- Name: projects projects_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -570,13 +663,6 @@ CREATE INDEX index_columns_on_table_id ON columns USING btree (table_id);
 
 
 --
--- Name: index_companies_on_uuid; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX index_companies_on_uuid ON companies USING btree (uuid);
-
-
---
 -- Name: index_groups_on_project_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -588,6 +674,41 @@ CREATE INDEX index_groups_on_project_id ON groups USING btree (project_id);
 --
 
 CREATE INDEX index_groups_on_user_id ON groups USING btree (user_id);
+
+
+--
+-- Name: index_invitations_on_company_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX index_invitations_on_company_id ON invitations USING btree (company_id);
+
+
+--
+-- Name: index_invitations_on_company_id_and_email; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX index_invitations_on_company_id_and_email ON invitations USING btree (company_id, email);
+
+
+--
+-- Name: index_invitations_on_invitee_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX index_invitations_on_invitee_id ON invitations USING btree (invitee_id);
+
+
+--
+-- Name: index_invitations_on_token; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX index_invitations_on_token ON invitations USING btree (token);
+
+
+--
+-- Name: index_invitations_on_user_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX index_invitations_on_user_id ON invitations USING btree (user_id);
 
 
 --
@@ -661,10 +782,10 @@ CREATE INDEX index_users_on_company_id ON users USING btree (company_id);
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: postgres
+-- Name: index_users_on_company_id_and_email; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+CREATE UNIQUE INDEX index_users_on_company_id_and_email ON users USING btree (company_id, email);
 
 
 --
@@ -672,6 +793,14 @@ CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
+
+
+--
+-- Name: invitations fk_rails_00204dc74b; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY invitations
+    ADD CONSTRAINT fk_rails_00204dc74b FOREIGN KEY (invitee_id) REFERENCES users(id);
 
 
 --
@@ -715,6 +844,14 @@ ALTER TABLE ONLY sql_files
 
 
 --
+-- Name: companies fk_rails_5ab5ec3338; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY companies
+    ADD CONSTRAINT fk_rails_5ab5ec3338 FOREIGN KEY (owner_id) REFERENCES users(id);
+
+
+--
 -- Name: groups fk_rails_5e78cd340a; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -728,6 +865,14 @@ ALTER TABLE ONLY groups
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT fk_rails_7682a3bdfe FOREIGN KEY (company_id) REFERENCES companies(id);
+
+
+--
+-- Name: invitations fk_rails_7eae413fe6; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY invitations
+    ADD CONSTRAINT fk_rails_7eae413fe6 FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -792,6 +937,22 @@ ALTER TABLE ONLY relationships
 
 ALTER TABLE ONLY sql_files
     ADD CONSTRAINT fk_rails_e31f8b763f FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: invitations fk_rails_f16e5a18d7; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY invitations
+    ADD CONSTRAINT fk_rails_f16e5a18d7 FOREIGN KEY (company_id) REFERENCES companies(id);
+
+
+--
+-- Name: orders orders_item_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT orders_item_code_fkey FOREIGN KEY (item_code, item_name) REFERENCES items(item_code, item_name);
 
 
 --

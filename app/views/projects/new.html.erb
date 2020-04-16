@@ -19,11 +19,20 @@
           </div>
 
           <div class='form-group'>
-            <%= f.label :import_sql %>
+            <%= f.label :table_csv %>
             <div class="custom-file">
-              <%= f.label :import_sql, class: 'custom-file-label', value: 'Import from SQL file' %>
-              <%= f.hidden_field :import_sql, value: @project.cached_import_sql_data %>
-              <%= f.file_field :import_sql, class: 'custom-file-input' %>
+              <%= f.label :table_csv, class: 'custom-file-label', value: 'Import tables from csv' %>
+              <%= f.hidden_field :table_csv, value: @project.cached_table_csv_data %>
+              <%= f.file_field :table_csv, class: 'custom-file-input' %>
+            </div>
+          </div>
+
+          <div class='form-group'>
+            <%= f.label :relation_csv %>
+            <div class="custom-file">
+              <%= f.label :relation_csv, class: 'custom-file-label', value: 'Import relations from csv' %>
+              <%= f.hidden_field :relation_csv, value: @project.cached_relation_csv_data %>
+              <%= f.file_field :relation_csv, class: 'custom-file-input' %>
             </div>
           </div>
 

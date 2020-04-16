@@ -42,18 +42,4 @@ class Relationship < ApplicationRecord
   def virtual?
     not (column && relation_column)
   end
-
-  def self.import_from_ddl_parser(project, parsed_relationship)
-    table = project.tables.where(name: parsed_relationship.table).first
-    column = table.columns.where(name: parsed_relationship.column).first
-    relation_table = project.tables.where(name: parsed_relationship.relation_table).first
-    relation_column = relation_table.columns.where(name: parsed_relationship.relation_column).first
-
-    project.relationships.create(
-      table: table,
-      column: column,
-      relation_table: relation_table,
-      relation_column: relation_column
-    )
-  end
 end
