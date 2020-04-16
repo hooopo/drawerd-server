@@ -60,8 +60,8 @@ class Project < ApplicationRecord
     if relation_csv.present?
       csv = relation_csv.download.read
       CSV.parse(csv, headers: true).each do |row|
-        table = self.tables.where(name: row['table'], schema: row['schema']).first rescue binding.pry
-        column = table.columns.where(name: row['column']).first rescue binding.pry
+        table = self.tables.where(name: row['table'], schema: row['schema']).first
+        column = table.columns.where(name: row['column']).first
 
         relation_table = self.tables.where(name: row['relation_table'], schema: row['relation_table_schema']).first
         relation_column = relation_table.columns.where(name: row['relation_column']).first

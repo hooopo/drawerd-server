@@ -15,7 +15,6 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.new(params.fetch(:project, {}).permit(:name, :adapter, :table_csv, :relation_csv))
     @project.company = current_user.company
-    binding.pry
     if @project.save
       redirect_to project_path(@project), notice: "Project successfully created"
     else

@@ -12,7 +12,8 @@ COPY (SELECT c.table_schema,
          kcu.table_catalog = c.table_catalog and 
          kcu.table_schema = c.table_schema and 
          kcu.table_name = c.table_name and 
-         kcu.column_name = c.column_name
+         kcu.column_name = c.column_name and 
+         kcu.position_in_unique_constraint is NULL
  WHERE c.table_schema not in ('information_schema', 'pg_catalog') 
  ORDER BY 1,2,5
 ) TO STDOUT DELIMITER ',' CSV HEADER
