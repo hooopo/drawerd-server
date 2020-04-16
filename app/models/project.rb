@@ -6,6 +6,7 @@
 #
 #  id                              :bigint           not null, primary key
 #  adapter(postgresql,mysql,mssql) :string           default("postgresql"), not null
+#  auto_draw                       :boolean          default(FALSE)
 #  import_sql_data                 :jsonb
 #  name                            :string
 #  relation_csv_data               :jsonb
@@ -26,6 +27,8 @@
 #  fk_rails_...  (company_id => companies.id)
 #  fk_rails_...  (user_id => users.id)
 #
+require 'csv'
+require 'tsv_detector'
 
 class Project < ApplicationRecord
   enum adapter: %w[postgresql mysql mssql].map { |name| [name, name] }.to_h
@@ -45,13 +48,18 @@ class Project < ApplicationRecord
   after_create do
     if table_csv.present?
       csv = table_csv.download.read
-      CSV.parse(csv, headers: true).each do |row|
+      if TsvDetector.new(csv).tsv?
+        opt = {headers: true}.merge(col_sep: "\t", quote_char: nil, liberal_parsing: true)
+      else
+        opt = {headers: true}
+      end
+      CSV.parse(csv, **opt).each do |row|
         table = self.tables.create_with(comment: row['table_comment']).find_or_create_by(schema: row['table_schema'], name: row['table_name'])
         next if table.new_record?
         column = table.columns.create_with(
           column_type: row['column_type'], 
           nullable: row['is_nullable'], 
-          is_pk: !!row['primary_key'],
+          is_pk: row['primary_key'],
           comment: row['column_comment']
         ).find_or_create_by(name: row['column_name'])
       end
@@ -59,7 +67,12 @@ class Project < ApplicationRecord
 
     if relation_csv.present?
       csv = relation_csv.download.read
-      CSV.parse(csv, headers: true).each do |row|
+      if TsvDetector.new(csv).tsv?
+        opt = {headers: true}.merge(col_sep: "\t", quote_char: nil, liberal_parsing: true)
+      else
+        opt = {headers: true}
+      end
+      CSV.parse(csv, **opt).each do |row|
         table = self.tables.where(name: row['table'], schema: row['schema']).first
         column = table.columns.where(name: row['column']).first
 
@@ -72,6 +85,21 @@ class Project < ApplicationRecord
           relation_table: relation_table,
           relation_column: relation_column
         )
+      end
+    else
+      if auto_draw
+        Column.joins(:table => :project).where(projects: {id: self.id}).each do |relation_column|
+          if single_table_name = relation_column.name[/^([a-zA-Z0-9_]+)_id$/, 1]
+            table = self.tables.where(name: single_table_name.pluralize).first
+            column = table.columns.where(name: 'id').first if table
+            self.relationships.create(
+              table: table, 
+              column: column, 
+              relation_table: relation_column.table, 
+              relation_column: relation_column
+            ) if table && column
+          end
+        end
       end
     end
   end

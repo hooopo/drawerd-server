@@ -1,10 +1,11 @@
+-- psql -d stackrails_dev -q -f export_sql/postgresql/tables.sql > table_csv.csv
 COPY (SELECT c.table_schema, 
        c.table_name, 
        c.column_name, 
        c.udt_name as column_type, 
        c.ordinal_position, 
-       c.is_nullable, 
-       kcu.constraint_name as primary_key,
+       case when c.is_nullable = 'YES' then 't' else 'f' end as is_nullable, 
+       case when kcu.constraint_name is null then 'f' else 't' end as primary_key,
        pg_catalog.col_description(format('%s.%s', c.table_schema, c.table_name)::regclass::oid, c.ordinal_position) as column_comment,
        obj_description(format('%s.%s', c.table_schema, c.table_name)::regclass::oid, 'pg_class') as table_comment 
  FROM  information_schema.columns c 
