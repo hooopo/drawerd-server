@@ -5,7 +5,14 @@
       <div class="col-lg-4 card-body">
         <p><strong class="headings-color">Notice</strong></p>
         <p class="text-muted">Adapter can't change after created.</p>
-        <p class="text-muted">Import DDL only support Postgres adapter now.</p>
+        <p class="text-muted">Import Postgresql table & relation: <%= link_to "https://help.drawerd.com/importing/importing-postgresql" %></p>
+        <p class="text-muted">Import MySQL table & relation: <%= link_to "https://help.drawerd.com/importing/importing-mysql" %></p>
+        <p class="text-muted">
+          If there are not any foreign keys in your database schema,  you don't need to import relations CSV file. You can use `auto draw` feature to detect relationship automatically. It has simple rule, for example:
+          <pre>
+            users.account_id -> accouts.id
+          </pre>
+        </p>
       </div>
       <div class="col-lg-8 card-form__body card-body">
         <%= form_for(@project) do |f| %>
