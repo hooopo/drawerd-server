@@ -42,6 +42,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
           <%= link_to 'Full', project_path(params.permit(:mode, :layout, :group_id).merge(mode: :full)), class: 'dropdown-item' %>
+          <%= link_to 'Accurate', project_path(params.permit(:mode, :layout, :group_id).merge(mode: :accurate)), class: 'dropdown-item' %>
           <%= link_to 'Simple', project_path(params.permit(:mode, :layout, :group_id).merge(mode: :simple)), class: 'dropdown-item' %>
         </div>
       </div>

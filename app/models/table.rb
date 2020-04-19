@@ -36,7 +36,7 @@ class Table < ApplicationRecord
   accepts_nested_attributes_for :columns, reject_if: :all_blank, allow_destroy: true
 
   def to_html(mode = :full)
-    if mode == :full
+    if mode == :full || mode == :accurate
       <<~HTML
         <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
           <TR>

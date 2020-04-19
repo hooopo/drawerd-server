@@ -108,7 +108,7 @@ class Project < ApplicationRecord
     base = {}
     base = base.merge(label: table.to_html(mode))
     base = base.merge(shape: :box) if mode == :simple
-    base = base.merge(shape: :plaintext) if mode == :full
+    base = base.merge(shape: :plaintext) if mode == :full || mode == :accurate
     base = base.merge(color: "#01f800") if mode == :simple
     base = base.merge(style: :filled) if mode == :simple
     base = base.merge(href: "javascript:window.parent.edit_table('#{Rails.application.routes.url_helpers.edit_project_table_path(self, table)}');")
@@ -127,7 +127,7 @@ class Project < ApplicationRecord
   def to_graph(mode: :full, layout: :dot, group_id: nil)
     #  "dot", "neato", "twopi", "fdp", "circo"
     layout = %w[dot fdp circo].map { |item| [item, item.to_sym]  }.to_h[layout] || :dot
-    mode = %w[simple full].map { |item| [item, item.to_sym]  }.to_h[mode] || :full
+    mode = %w[simple full accurate].map { |item| [item, item.to_sym]  }.to_h[mode] || :full
     graph = GraphViz.new(name, rankdir: "LR", bgcolor: "#F7F8F9", use: layout, compound: true)
     graph.edge["lhead"] = ""
     graph.edge["ltail"] = ""
@@ -164,13 +164,13 @@ class Project < ApplicationRecord
 
     relationships.each do |rel|
       next unless table2nodes[rel.table_id] && table2nodes[rel.relation_table_id]
-      if rel.column_id
+      if rel.column_id && layout == :dot && mode == :accurate
         from = {table2nodes[rel.table_id] => "right#{rel.column_id}"}
       else
         from = table2nodes[rel.table_id]
       end
 
-      if rel.relation_column_id
+      if rel.relation_column_id && layout == :dot && mode == :accurate
         to = {table2nodes[rel.relation_table_id] => "left#{rel.relation_column_id}"}
       else
         to = table2nodes[rel.relation_table_id]
