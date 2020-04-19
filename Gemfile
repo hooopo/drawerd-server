@@ -78,15 +78,9 @@ gem "ruby-graphviz", "~> 1.2", require: "graphviz"
 
 gem "pry-rails", "~> 0.3.9"
 
-gem "parslet", "~> 2.0"
-
-gem "pg_query", "~> 1.2"
-
 gem "shrine", "~> 3.2"
 
 gem "dry-struct", "~> 1.3"
-
-gem "mysql-parser", "~> 0.0.3"
 
 gem "sentry-raven", "~> 3.0"
 

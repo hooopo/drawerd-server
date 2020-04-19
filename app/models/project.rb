@@ -164,9 +164,20 @@ class Project < ApplicationRecord
 
     relationships.each do |rel|
       next unless table2nodes[rel.table_id] && table2nodes[rel.relation_table_id]
+      if rel.column_id
+        from = {table2nodes[rel.table_id] => "right#{rel.column_id}"}
+      else
+        from = table2nodes[rel.table_id]
+      end
+
+      if rel.relation_column_id
+        to = {table2nodes[rel.relation_table_id] => "left#{rel.relation_column_id}"}
+      else
+        to = table2nodes[rel.relation_table_id]
+      end
       graph.add_edges(
-        table2nodes[rel.table_id],
-        table2nodes[rel.relation_table_id],
+        from,
+        to,
         edge_attributes(rel)
       )
     end
