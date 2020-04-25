@@ -83,7 +83,8 @@ class Project < ApplicationRecord
           table: table,
           column: column,
           relation_table: relation_table,
-          relation_column: relation_column
+          relation_column: relation_column,
+          relation_type: row['relation_type'] || 'many'
         )
       end
     else
