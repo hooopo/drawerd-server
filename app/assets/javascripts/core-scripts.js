@@ -10,6 +10,7 @@
 
 //= require dom-factory/dist/dom-factory.js
 //= require clipboard/dist/clipboard.min.js
+//= require bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js
 
 //** PLUGIN SCRIPTS (NODE_MODULES)
 // PRO ONLY

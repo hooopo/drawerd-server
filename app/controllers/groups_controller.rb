@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
 
   def create
     @project = current_user.company.projects.find(params[:project_id])
-    @group   = @project.groups.new(params.fetch(:group, {}).permit(:name))
+    @group   = @project.groups.new(params.fetch(:group, {}).permit(:name, :color))
     @group.user = current_user
     if @group.save
       render js: "$('#new-group').modal('toggle');"

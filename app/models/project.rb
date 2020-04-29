@@ -141,7 +141,7 @@ class Project < ApplicationRecord
     table2nodes = {}
     base_tables.group_by { |t| t.group }.each do |group, tables|
       if group
-        sub_graph = graph.add_graph("cluster#{group.id}", rankdir: "LR", bgcolor: "#F7F8F9", compound: true)
+        sub_graph = graph.add_graph("cluster#{group.id}", rankdir: "LR", bgcolor: group.color_with_default, compound: true)
         sub_graph[:label] = group.name
         sub_graph[:style] = :dashed
         tables.each do |table|
