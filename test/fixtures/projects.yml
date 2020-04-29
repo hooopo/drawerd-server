@@ -4,12 +4,16 @@
 #
 #  id                              :bigint           not null, primary key
 #  adapter(postgresql,mysql,mssql) :string           default("postgresql"), not null
+#  arrow_color                     :string
 #  auto_draw                       :boolean          default(FALSE)
+#  bg_color                        :string
 #  import_sql_data                 :jsonb
 #  name                            :string
 #  relation_csv_data               :jsonb
 #  share_key                       :string
+#  table_body_color                :string
 #  table_csv_data                  :jsonb
+#  table_header_color              :string
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #  company_id                      :bigint

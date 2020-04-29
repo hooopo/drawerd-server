@@ -29,7 +29,7 @@ class RegistrationsController < ApplicationController
     else
       @user.company = @user.own_company
     end
-    
+
     if @user.save
       @invitation.update(invitee: @user) if @invitation
       cookies.permanent[:remember_token] = @user.remember_token

@@ -6,12 +6,16 @@
 #
 #  id                              :bigint           not null, primary key
 #  adapter(postgresql,mysql,mssql) :string           default("postgresql"), not null
+#  arrow_color                     :string
 #  auto_draw                       :boolean          default(FALSE)
+#  bg_color                        :string
 #  import_sql_data                 :jsonb
 #  name                            :string
 #  relation_csv_data               :jsonb
 #  share_key                       :string
+#  table_body_color                :string
 #  table_csv_data                  :jsonb
+#  table_header_color              :string
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #  company_id                      :bigint
@@ -27,8 +31,8 @@
 #  fk_rails_...  (company_id => companies.id)
 #  fk_rails_...  (user_id => users.id)
 #
-require 'csv'
-require 'tsv_detector'
+require "csv"
+require "tsv_detector"
 
 class Project < ApplicationRecord
   enum adapter: %w[postgresql mysql mssql].map { |name| [name, name] }.to_h
@@ -45,58 +49,75 @@ class Project < ApplicationRecord
     self.share_key = SecureRandom.hex(15)
   end
 
+  validates_format_of :bg_color,
+    with: /\A#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/,
+    allow_blank: true,
+    message: "Accept Hex color"
+  validates_format_of :table_header_color,
+    with: /\A#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/,
+    allow_blank: true,
+    message: "Accept Hex color"
+  validates_format_of :table_body_color,
+    with: /\A#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/,
+    allow_blank: true,
+    message: "Accept Hex color"
+  validates_format_of :arrow_color,
+    with: /\A#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/,
+    allow_blank: true,
+    message: "Accept Hex color"
+
   after_create do
     if table_csv.present?
       csv = table_csv.download.read
       if TsvDetector.new(csv).tsv?
-        opt = {headers: true}.merge(col_sep: "\t", quote_char: nil, liberal_parsing: true)
+        opt = { headers: true }.merge(col_sep: "\t", quote_char: nil, liberal_parsing: true)
       else
-        opt = {headers: true}
+        opt = { headers: true }
       end
       CSV.parse(csv, **opt).each do |row|
-        table = self.tables.create_with(comment: row['table_comment']).find_or_create_by(schema: row['table_schema'], name: row['table_name'])
+        table = self.tables.create_with(comment: row["table_comment"]).find_or_create_by(schema: row["table_schema"], name: row["table_name"])
         next if table.new_record?
         column = table.columns.create_with(
-          column_type: row['column_type'], 
-          nullable: row['is_nullable'], 
-          is_pk: row['primary_key'],
-          comment: row['column_comment']
-        ).find_or_create_by(name: row['column_name'])
+          column_type: row["column_type"],
+          nullable: row["is_nullable"],
+          is_pk: row["primary_key"],
+          comment: row["column_comment"]
+        ).find_or_create_by(name: row["column_name"])
       end
     end
 
     if relation_csv.present?
       csv = relation_csv.download.read
       if TsvDetector.new(csv).tsv?
-        opt = {headers: true}.merge(col_sep: "\t", quote_char: nil, liberal_parsing: true)
+        opt = { headers: true }.merge(col_sep: "\t", quote_char: nil, liberal_parsing: true)
       else
-        opt = {headers: true}
+        opt = { headers: true }
       end
       CSV.parse(csv, **opt).each do |row|
-        table = self.tables.where(name: row['table'], schema: row['schema']).first
-        column = table.columns.where(name: row['column']).first
+        table = self.tables.where(name: row["table"], schema: row["schema"]).first
+        column = table.columns.where(name: row["column"]).first
 
-        relation_table = self.tables.where(name: row['relation_table'], schema: row['relation_table_schema']).first
-        relation_column = relation_table.columns.where(name: row['relation_column']).first
+        relation_table = self.tables.where(name: row["relation_table"], schema: row["relation_table_schema"]).first
+        relation_column = relation_table.columns.where(name: row["relation_column"]).first
 
         self.relationships.create(
           table: table,
           column: column,
           relation_table: relation_table,
           relation_column: relation_column,
-          relation_type: row['relation_type'] || 'many'
+          relation_type: row["relation_type"] || "many"
         )
       end
     else
       if auto_draw
-        Column.joins(:table => :project).where(projects: {id: self.id}).each do |relation_column|
+        Column.joins(table: :project).where(projects: { id: self.id }).each do |relation_column|
           if single_table_name = relation_column.name[/^([a-zA-Z0-9_]+)_id$/, 1]
             table = self.tables.where(name: single_table_name.pluralize).first
-            column = table.columns.where(name: 'id').first if table
+            column = table.columns.where(name: "id").first if table
             self.relationships.create(
-              table: table, 
-              column: column, 
-              relation_table: relation_column.table, 
+              table: table,
+              column: column,
+              relation_table: relation_column.table,
               relation_column: relation_column
             ) if table && column
           end
@@ -166,13 +187,13 @@ class Project < ApplicationRecord
     relationships.each do |rel|
       next unless table2nodes[rel.table_id] && table2nodes[rel.relation_table_id]
       if rel.column_id && layout == :dot && mode == :accurate
-        from = {table2nodes[rel.table_id] => "right#{rel.column_id}"}
+        from = { table2nodes[rel.table_id] => "right#{rel.column_id}" }
       else
         from = table2nodes[rel.table_id]
       end
 
       if rel.relation_column_id && layout == :dot && mode == :accurate
-        to = {table2nodes[rel.relation_table_id] => "left#{rel.relation_column_id}"}
+        to = { table2nodes[rel.relation_table_id] => "left#{rel.relation_column_id}" }
       else
         to = table2nodes[rel.relation_table_id]
       end

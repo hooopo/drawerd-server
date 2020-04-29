@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: invitations
@@ -29,12 +31,12 @@
 class Invitation < ApplicationRecord
   belongs_to :company
   belongs_to :user
-  belongs_to :invitee, class_name: 'User', optional: true
+  belongs_to :invitee, class_name: "User", optional: true
 
   validates :email, presence: true
   validates :email, uniqueness: { scope: :company_id, message: "should be uniqueness per company" }
 
-  before_create do 
+  before_create do
     self.token = SecureRandom.hex(32)
   end
 end

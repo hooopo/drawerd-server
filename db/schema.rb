@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_073511) do
+ActiveRecord::Schema.define(version: 2020_04_29_094747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,10 @@ ActiveRecord::Schema.define(version: 2020_04_29_073511) do
     t.jsonb "table_csv_data"
     t.jsonb "relation_csv_data"
     t.boolean "auto_draw", default: false
+    t.string "bg_color"
+    t.string "table_header_color"
+    t.string "table_body_color"
+    t.string "arrow_color"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end

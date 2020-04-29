@@ -29,12 +29,12 @@ class Group < ApplicationRecord
   has_many :tables
   validates :name, presence: true
   validates :name, uniqueness: { scope: :project_id }
-  validates_format_of :color, 
-    with: /\A#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/, 
+  validates_format_of :color,
+    with: /\A#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/,
     allow_blank: true,
     message: "Accept Hex color"
 
   def color_with_default
-    color.presence || "#F7F8F9" 
+    color.presence || "#F7F8F9"
   end
 end

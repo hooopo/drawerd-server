@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InvitationsController < ApplicationController
   before_action :redirect_to_subdomain
 
@@ -10,10 +12,10 @@ class InvitationsController < ApplicationController
     @invitation = current_user.invitations.new(invitation_params)
     @invitation.company = current_company
     if @invitation.save
-      InvitationMailer.invite(@invitation, new_registration_url(:token => @invitation.token, host: default_host)).deliver
-      redirect_to new_invitation_path, notice: 'Invite successed.'
+      InvitationMailer.invite(@invitation, new_registration_url(token: @invitation.token, host: default_host)).deliver
+      redirect_to new_invitation_path, notice: "Invite successed."
     else
-      flash.now[:error] = 'Invite failed.'
+      flash.now[:error] = "Invite failed."
       render :new
     end
   end

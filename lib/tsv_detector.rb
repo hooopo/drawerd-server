@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TsvDetector
   attr_reader :text
   def initialize(text)
