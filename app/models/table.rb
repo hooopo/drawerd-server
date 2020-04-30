@@ -40,7 +40,7 @@ class Table < ApplicationRecord
       <<~HTML
         <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
           <TR>
-            <TD bgcolor='#ececfc' ALIGN="CENTER" colspan="3"><b>#{display_name}</b></TD>
+            <TD bgcolor='#{project.table_header_color_with_default}' ALIGN="CENTER" colspan="3"><b>#{display_name}</b></TD>
           </TR>
           #{column_html}
          </TABLE>>

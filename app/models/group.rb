@@ -34,7 +34,9 @@ class Group < ApplicationRecord
     allow_blank: true,
     message: "Accept Hex color"
 
+  DEFAULT_COLOR = "#F7F8F9"
+
   def color_with_default
-    color.presence || "#F7F8F9"
+    color.presence || DEFAULT_COLOR
   end
 end

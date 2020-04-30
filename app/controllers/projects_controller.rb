@@ -5,15 +5,29 @@ class ProjectsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:render_svg]
 
   def index
-    @projects = current_user.company.projects
+    @projects = current_user.company.projects.order("id desc")
   end
 
   def new
     @project = current_user.projects.new
   end
 
+  def edit
+    @project = current_company.projects.find(params[:id])
+  end
+
+  def update
+    @project = current_company.projects.find(params[:id])
+    if @project.update(project_update_params)
+      redirect_to project_path(@project), notice: "Project successfully updated"
+    else
+      flash.now[:notice] = "fail"
+      render :edit
+    end
+  end
+
   def create
-    @project = current_user.projects.new(params.fetch(:project, {}).permit(:name, :adapter, :table_csv, :relation_csv, :auto_draw))
+    @project = current_user.projects.new(project_create_params)
     @project.company = current_user.company
     if @project.save
       redirect_to project_path(@project), notice: "Project successfully created"
@@ -48,5 +62,13 @@ class ProjectsController < ApplicationController
     @table   = @project.tables.find(params[:table_id])
     @columns = @table.columns.select("id, name").order("id asc")
     render json: { columns: @columns }
+  end
+
+  def project_update_params
+    params.fetch(:project, {}).permit(:bg_color, :table_header_color, :table_body_color, :arrow_color)
+  end
+
+  def project_create_params
+    params.fetch(:project, {}).permit(:name, :adapter, :table_csv, :relation_csv, :auto_draw)
   end
 end

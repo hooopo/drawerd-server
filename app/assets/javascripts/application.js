@@ -86,6 +86,10 @@ $(document).ready(function(){
   }
 
   var clipboard = new ClipboardJS('#copy_svg_link');
-
+  
+  $('#bg-color-picker').colorpicker({"color": $("#bg-color-picker input").val() || "#F7F8F9"});
+  $('#table-header-color-picker').colorpicker({"color": $("#table-header-color-picker input").val() || "#ececfc"});
+  $('#table-body-color-picker').colorpicker({"color": $("#table-body-color-picker input").val() || "#01f800"});
+  $('#arrow-color-picker').colorpicker({"color": $("#arrow-color-picker input").val() || "#000000"});
 
 });

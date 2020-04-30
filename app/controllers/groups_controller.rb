@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
     @group   = @project.groups.new(params.fetch(:group, {}).permit(:name, :color))
     @group.user = current_user
     if @group.save
-      render js: "$('#new-group').modal('toggle');"
+      render js: "$('#new-group').modal('toggle');window.location.reload();"
     else
       render js: %Q|alert("#{@group.errors.full_messages.join(", ")}");|
     end

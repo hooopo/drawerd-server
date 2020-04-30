@@ -45,8 +45,29 @@ class Project < ApplicationRecord
   include FileUploader::Attachment(:table_csv)
   include FileUploader::Attachment(:relation_csv)
 
+  DEFAULT_TABLE_HEADER_COLOR = "#ececfc"
+  DEFAULT_BG_COLOR           = "#F7F8F9"
+  DEFAULT_TABLE_BODY_COLOR   = "#01f800"
+  DEFAULT_ARROW_COLOR        = "#000000"
+
   before_create do
     self.share_key = SecureRandom.hex(15)
+  end
+
+  def table_header_color_with_default
+    table_header_color.presence || DEFAULT_TABLE_HEADER_COLOR
+  end
+
+  def table_body_color_with_default
+    table_body_color.presence || DEFAULT_TABLE_BODY_COLOR
+  end
+
+  def bg_color_with_default
+    bg_color.presence || DEFAULT_BG_COLOR
+  end
+
+  def arrow_color_with_default
+    arrow_color.presence || DEFAULT_ARROW_COLOR
   end
 
   validates_format_of :bg_color,
@@ -131,7 +152,7 @@ class Project < ApplicationRecord
     base = base.merge(label: table.to_html(mode))
     base = base.merge(shape: :box) if mode == :simple
     base = base.merge(shape: :plaintext) if mode == :full || mode == :accurate
-    base = base.merge(color: "#01f800") if mode == :simple
+    base = base.merge(color: table_body_color_with_default) if mode == :simple
     base = base.merge(style: :filled) if mode == :simple
     base = base.merge(href: "javascript:window.parent.edit_table('#{Rails.application.routes.url_helpers.edit_project_table_path(self, table)}');")
     base
@@ -143,6 +164,7 @@ class Project < ApplicationRecord
     base = base.merge(style: :dashed) if rel.virtual?
     base = base.merge(href: "javascript:window.parent.edit_relationship('#{Rails.application.routes.url_helpers.edit_project_relationship_path(self, rel)}');")
     base = base.merge(label: rel.relation_type)
+    base = base.merge(color: arrow_color_with_default)
     base
   end
 
@@ -150,7 +172,7 @@ class Project < ApplicationRecord
     #  "dot", "neato", "twopi", "fdp", "circo"
     layout = %w[dot fdp circo].map { |item| [item, item.to_sym]  }.to_h[layout] || :dot
     mode = %w[simple full accurate].map { |item| [item, item.to_sym]  }.to_h[mode] || :full
-    graph = GraphViz.new(name, rankdir: "LR", bgcolor: "#F7F8F9", use: layout, compound: true)
+    graph = GraphViz.new(name, rankdir: "LR", bgcolor: bg_color_with_default, use: layout, compound: true)
     graph.edge["lhead"] = ""
     graph.edge["ltail"] = ""
 
