@@ -8,6 +8,7 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= render :partial => 'layouts/ga' %>
   </head>
 
   <body class="<%= @body_class || 'layout-default' %>">
