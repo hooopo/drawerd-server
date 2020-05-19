@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_094747) do
+ActiveRecord::Schema.define(version: 2020_05_18_045511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,21 @@ ActiveRecord::Schema.define(version: 2020_04_29_094747) do
     t.index ["user_id"], name: "index_sql_files_on_user_id"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.bigint "company_id"
+    t.bigint "user_id"
+    t.string "plan", default: "free"
+    t.string "plan_cycle", default: "monthly"
+    t.string "state", default: "trial"
+    t.datetime "start_at"
+    t.datetime "trial_end_at"
+    t.jsonb "event_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_subscriptions_on_company_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
   create_table "tables", force: :cascade do |t|
     t.bigint "project_id"
     t.string "name"
@@ -177,6 +192,8 @@ ActiveRecord::Schema.define(version: 2020_04_29_094747) do
   add_foreign_key "relationships", "tables", column: "relation_table_id"
   add_foreign_key "sql_files", "projects"
   add_foreign_key "sql_files", "users"
+  add_foreign_key "subscriptions", "companies"
+  add_foreign_key "subscriptions", "users"
   add_foreign_key "tables", "groups"
   add_foreign_key "tables", "projects"
   add_foreign_key "users", "companies"

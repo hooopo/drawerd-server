@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   constraints(Subdomain) do
     root to: "projects#index"
+    resources :subscriptions
     resources :invitations, only: [:new, :create, :destroy]
     resources :projects do
       member do
