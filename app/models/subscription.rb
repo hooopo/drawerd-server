@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: subscriptions
@@ -26,6 +28,8 @@
 #
 
 class Subscription < ApplicationRecord
+  belongs_to :user
+  belongs_to :company
   enum plan_cycle: %w[monthly yearly].map { |name| [name, name] }.to_h
   enum state: %w[trial active refunded cancelled].map { |name| [name, name] }.to_h
 end

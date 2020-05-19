@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create]
   delete "sign_out" => "sessions#destroy", as: :destroy_session
   post "redirect/go" => "redirect#go"
+  post "payment_webhook" => "payment#webhook"
 
   root to: "sessions#new"
 
