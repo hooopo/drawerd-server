@@ -88,3 +88,5 @@ gem "sentry-raven", "~> 3.0"
 gem "sendgrid-actionmailer", "~> 3.0"
 
 gem "bcrypt", "~> 3.1"
+
+gem "php_serialize", "~> 1.2"
