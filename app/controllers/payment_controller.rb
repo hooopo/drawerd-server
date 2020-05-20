@@ -13,9 +13,9 @@ class PaymentController < ApplicationController
     if data["alert_name"] == "subscription_created"
       user = User.find JSON.parse(data["passthrough"])["user_id"]
       user.subscriptions.create!(company: user.company, event_data: data)
-      render text: :ok
+      render plain: :ok
     else
-      render text: :unknown
+      render plain: :unknown
     end
   end
 end
