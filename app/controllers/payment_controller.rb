@@ -5,8 +5,11 @@ class PaymentController < ApplicationController
   skip_before_action :authenticate_user!
 
   def webhook
-    data = params.permit!.to_h
-    head 400 unless Paddle.verify(data)
+    data = params.except(:controller, :action).permit!.to_h
+    if not Paddle.verify(data)
+      head 400 
+      return 
+    end
     if data["alert_name"] == "subscription_created"
       user = User.find JSON.parse(data["passthrough"])["user_id"]
       user.subscriptions.create!(company: user.company, event_data: data)
