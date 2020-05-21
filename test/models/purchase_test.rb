@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: purchases
@@ -26,7 +28,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-require 'test_helper'
+require "test_helper"
 
 class PurchaseTest < ActiveSupport::TestCase
   # test "the truth" do
