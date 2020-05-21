@@ -32,4 +32,8 @@ class Purchase < ApplicationRecord
   belongs_to :subscription
   belongs_to :user
   belongs_to :company
+
+  after_create do
+    subscription.update(next_bill_date: self.next_bill_date, state: :active)
+  end
 end
