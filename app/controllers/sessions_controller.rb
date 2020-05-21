@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       else
         cookies[:remember_token] = @user.remember_token
       end
-      redirect_to projects_path, notice: "Login successed"
+      redirect_to projects_path
     else
       flash.now[:error] = "Email or password is wrong"
       render "new"
