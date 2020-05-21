@@ -1,0 +1,39 @@
+<div class="container-fluid page__container">
+  <div>
+      <table class="table">
+        <th>
+          Plan
+        </th>
+        <th>
+          Username
+        </th>
+        <th>
+          Plan Cycle
+        </th>
+        <th>
+          State
+        </th>
+        <th>
+          Next bill date
+        </th>
+        <th>
+          Action
+        </th>
+        <% @subscriptions.each do |sub| %>
+          <tr>
+            <td><%= sub.plan %></td>
+            <td><%= sub.user&.username %></td>
+            <td><%= sub.plan_cycle %></td>
+            <td><%= sub.state %></td>
+            <td><%= sub.next_bill_date %></td>
+            <td><a class="paddle_button" data-override="<%= sub.event_data['cancel_url']%>" >Cancel</a></td>
+          </tr>
+        <% end %>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+<script type="text/javascript">
+  Paddle.Setup({ vendor: 114209 });
+</script>

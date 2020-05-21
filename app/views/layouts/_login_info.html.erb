@@ -6,8 +6,8 @@
     </span>
   </a>
   <div id="account_menu" class="dropdown-menu dropdown-menu-right">
-    <a class="dropdown-item" href="#"  onClick="alert('Available in PRO version!')" >Edit account</a>
     <%= link_to "Invite Member", new_invitation_path, class: 'dropdown-item' %>
+    <%= link_to "Billing", subscriptions_path, class: 'dropdown-item' %>
     <div class="dropdown-divider"></div>
     <%= link_to('Logout', destroy_session_path, method: :delete, class: 'dropdown-item') %> 
   </div>

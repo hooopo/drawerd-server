@@ -31,7 +31,9 @@ class PaymentController < ApplicationController
       )
       render plain: :ok
     elsif data['alert_name'] == 'subscription_cancelled'
-
+      subscription = user.company.subscriptions.where(paddle_subscription_id: data["subscription_id"]).first
+      subscription.update(state: :cancelled)
+      render plain: :ok
     else
       render plain: :unknown
     end

@@ -5,4 +5,8 @@ class SubscriptionsController < ApplicationController
 
   def new
   end
+
+  def index
+    @subscriptions = current_company.subscriptions
+  end
 end
