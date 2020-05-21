@@ -10,9 +10,26 @@ class PaymentController < ApplicationController
       head 400 
       return 
     end
+    user = User.find JSON.parse(data["passthrough"])["user_id"]
     if data["alert_name"] == "subscription_created"
-      user = User.find JSON.parse(data["passthrough"])["user_id"]
-      user.subscriptions.create!(company: user.company, event_data: data)
+      user.subscriptions.create!(
+        company: user.company, 
+        event_data: data,
+        next_bill_date: data['next_bill_date'],
+        plan: Plan::TYPES[data['subscription_plan_id'].to_i],
+        paddle_subscription_id: data['subscription_id']
+      )
+      render plain: :ok
+    elsif data['alert_name'] == 'subscription_payment_succeeded'
+      subscription = company.subscriptions.where(paddle_subscription_id: data['subscription_id']).first
+      subscription.create!(
+        user: user,
+        company: user.company,
+        next_bill_date: data['next_bill_date'],
+        payment_method: data['payment_method'],
+        event_data: data
+      )
+      subscription.update(next_bill_date: data['next_bill_date'], state: :active)
       render plain: :ok
     else
       render plain: :unknown

@@ -40,12 +40,14 @@
       <div class="card-body">
         <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
         <ul class="list-unstyled mt-3 mb-4">
-          <li>10 users included</li>
-          <li>2 GB of storage</li>
-          <li>Email support</li>
-          <li>Help center access</li>
+          <li>Up to 100 diagrams</li>
+          <li>Private & Embedded diagrams</li>
+          <li>Table Group</li>
+          <li>Custom diagram colors</li>
+          <li>SQL import</li>
+          <li>Export to SVG</li>
+          <li>Up to 5 team members</li>
         </ul>
-        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
       </div>
     </div>
     <div class="card mb-4 box-shadow">
@@ -55,12 +57,15 @@
       <div class="card-body">
         <h1 class="card-title pricing-card-title">$5 <small class="text-muted">/ mo</small></h1>
         <ul class="list-unstyled mt-3 mb-4">
-          <li>20 users included</li>
-          <li>10 GB of storage</li>
-          <li>Priority email support</li>
-          <li>Help center access</li>
+          <li>Up to 300 diagrams</li>
+          <li>Private & Embedded diagrams</li>
+          <li>Table Group</li>
+          <li>Custom diagram colors</li>
+          <li>SQL import</li>
+          <li>Export to SVG</li>
+          <li>Up to 50 team members</li>
         </ul>
-        <a type="button" id='buy-pro' class="btn btn-lg btn-block btn-primary">Get started</a>
+        <a type="button" id='buy-pro' class="btn btn-lg btn-block btn-primary <%= current_company.current_plan != :free ? 'disabled' : '' %>">Get started</a>
       </div>
     </div>
     <div class="card mb-4 box-shadow">
@@ -70,12 +75,16 @@
       <div class="card-body">
         <h1 class="card-title pricing-card-title">$49 <small class="text-muted">/ mo</small></h1>
         <ul class="list-unstyled mt-3 mb-4">
-          <li>30 users included</li>
-          <li>15 GB of storage</li>
-          <li>Phone and email support</li>
-          <li>Help center access</li>
+          <li>Unlimitted diagrams</li>
+          <li>Private & Embedded diagrams</li>
+          <li>Table Group</li>
+          <li>Custom diagram colors</li>
+          <li>SQL import</li>
+          <li>Export to SVG</li>
+          <li>Unlimitted team members</li>
+          <li>Custom service & requirement</li>
         </ul>
-        <a type="button" id="buy-enterprise" class="btn btn-lg btn-block btn-primary">Get started</a>
+        <a type="button" id="buy-enterprise" class="btn btn-lg btn-block btn-primary <%= current_company.current_plan != :free ? 'disabled' : '' %>">Get started</a>
       </div>
     </div>
   </div>

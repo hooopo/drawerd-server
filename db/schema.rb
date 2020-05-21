@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_18_045511) do
+ActiveRecord::Schema.define(version: 2020_05_20_230211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,21 @@ ActiveRecord::Schema.define(version: 2020_05_18_045511) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
+  create_table "purchases", force: :cascade do |t|
+    t.bigint "company_id"
+    t.bigint "user_id"
+    t.bigint "subscription_id"
+    t.date "next_bill_date"
+    t.string "paddle_subscription_id"
+    t.string "payment_method"
+    t.jsonb "event_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_purchases_on_company_id"
+    t.index ["subscription_id"], name: "index_purchases_on_subscription_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.bigint "project_id"
     t.bigint "table_id"
@@ -139,10 +154,11 @@ ActiveRecord::Schema.define(version: 2020_05_18_045511) do
     t.string "plan_cycle", default: "monthly"
     t.string "state", default: "trial"
     t.datetime "start_at"
-    t.datetime "trial_end_at"
     t.jsonb "event_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "next_bill_date"
+    t.string "paddle_subscription_id"
     t.index ["company_id"], name: "index_subscriptions_on_company_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
@@ -185,6 +201,9 @@ ActiveRecord::Schema.define(version: 2020_05_18_045511) do
   add_foreign_key "orders", "items", column: "item_code", primary_key: "item_code", name: "orders_item_code_fkey"
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users"
+  add_foreign_key "purchases", "companies"
+  add_foreign_key "purchases", "subscriptions"
+  add_foreign_key "purchases", "users"
   add_foreign_key "relationships", "columns"
   add_foreign_key "relationships", "columns", column: "relation_column_id"
   add_foreign_key "relationships", "projects"

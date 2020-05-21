@@ -4,17 +4,18 @@
 #
 # Table name: subscriptions
 #
-#  id           :bigint           not null, primary key
-#  event_data   :jsonb
-#  plan         :string           default("free")
-#  plan_cycle   :string           default("monthly")
-#  start_at     :datetime
-#  state        :string           default("trial")
-#  trial_end_at :datetime
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  company_id   :bigint
-#  user_id      :bigint
+#  id                     :bigint           not null, primary key
+#  event_data             :jsonb
+#  next_bill_date         :date
+#  plan                   :string           default("free")
+#  plan_cycle             :string           default("monthly")
+#  start_at               :datetime
+#  state                  :string           default("trial")
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  company_id             :bigint
+#  paddle_subscription_id :string
+#  user_id                :bigint
 #
 # Indexes
 #
