@@ -26,7 +26,11 @@
             <td><%= sub.plan_cycle %></td>
             <td><%= sub.state %></td>
             <td><%= sub.next_bill_date %></td>
-            <td><a class="paddle_button" data-override="<%= sub.event_data['cancel_url']%>" >Cancel</a></td>
+            <td>
+              <% if sub.trial? || sub.active? %>
+                <a class="paddle_button" data-override="<%= sub.event_data['cancel_url']%>" >Cancel</a>
+              <% end %>
+            </td>
           </tr>
         <% end %>
         </table>
