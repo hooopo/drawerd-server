@@ -21,7 +21,7 @@ class PaymentController < ApplicationController
       )
       render plain: :ok
     elsif data["alert_name"] == "subscription_payment_succeeded"
-      subscription = company.subscriptions.where(paddle_subscription_id: data["subscription_id"]).first
+      subscription = user.company.subscriptions.where(paddle_subscription_id: data["subscription_id"]).first
       subscription.create!(
         user: user,
         company: user.company,
@@ -31,6 +31,8 @@ class PaymentController < ApplicationController
       )
       subscription.update(next_bill_date: data["next_bill_date"], state: :active)
       render plain: :ok
+    elsif data['alert_name'] == 'subscription_cancelled'
+
     else
       render plain: :unknown
     end
