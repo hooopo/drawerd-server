@@ -1,4 +1,10 @@
 <div class="layout-login-centered-boxed__form card" >
+<div class="d-flex justify-content-center mt-2 mb-4 navbar-light">
+  <a href="" class="navbar-brand" style="min-width: 0">
+    <img class="navbar-brand-icon" src="<%= image_path('logo-icon.png')%>" width="30" alt="DrawERD">
+    <span>DrawERD</span>
+  </a>
+</div>
 <%= render 'layouts/messages' %>
 <% if request.subdomain.present? %>
   <%= form_for(User.new, url: sessions_path, html: {method: :post}) do |f| %>
