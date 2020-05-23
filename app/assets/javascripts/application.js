@@ -92,4 +92,4 @@ $(document).ready(function(){
   $('#table-body-color-picker').colorpicker({"color": $("#table-body-color-picker input").val() || "#01f800"});
   $('#arrow-color-picker').colorpicker({"color": $("#arrow-color-picker input").val() || "#000000"});
 
-});
+});//= require cookies_eu

@@ -90,3 +90,5 @@ gem "sendgrid-actionmailer", "~> 3.0"
 gem "bcrypt", "~> 3.1"
 
 gem "php_serialize", "~> 1.2"
+
+gem "cookies_eu", "~> 1.7"
