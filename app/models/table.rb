@@ -46,7 +46,7 @@ class Table < ApplicationRecord
          </TABLE>>
       HTML
     else
-      display_name
+      display_name(mode)
     end
   end
 
@@ -56,12 +56,16 @@ class Table < ApplicationRecord
     end.join("\n")
   end
 
-  def display_name
+  def display_name(mode = :full)
     output = if schema == "public"
       name
     else
       [schema, name].join(".")
     end
-    [output, comment.presence].compact.join("/")
+    if mode == :simple
+      [output, comment.presence].compact.join("\n")
+    else
+      [output, comment.presence].compact.join("<br />")
+    end
   end
 end

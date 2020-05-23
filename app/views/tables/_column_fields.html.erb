@@ -1,33 +1,33 @@
 <div class='nested-fields'>
-  <div class="form-row">
-    <div class="form-group col-md-3">
+  <div class="form-row form-row-sm">
+    <div class="form-group form-group-sm col-md-3">
       <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
+      <%= f.text_field :name, class: 'form-control form-control-sm' %>
     </div>
 
-    <div class="form-group col-md-3">
+    <div class="form-group form-group-sm col-md-3">
       <%= f.label :column_type %>
-      <%= f.select :column_type, Column::TYPES, {}, class: 'form-control' %>
+      <%= f.select :column_type, Column::TYPES, {}, class: 'form-control form-control-sm' %>
     </div>
 
-    <div class="form-group col-md-3">
+    <div class="form-group form-group-sm col-md-3">
       <%= f.label :comment %>
-      <%= f.text_field :comment, class: 'form-control' %>
+      <%= f.text_field :comment, class: 'form-control form-control-sm' %>
     </div>
 
-    <div class="form-group col-md-1">
+    <div class="form-group form-group-sm col-md-1">
       <%= f.label :nullable %>
-      <%= f.select :nullable, [true, false], {}, class: 'form-control' %>
+      <%= f.select :nullable, [true, false], {}, class: 'form-control form-control-sm' %>
     </div>
 
-    <div class="form-group col-md-1">
+    <div class="form-group form-group-sm col-md-1">
       <%= f.label :is_pk %>
-      <%= f.select :is_pk, [false, true], {}, class: 'form-control' %>
+      <%= f.select :is_pk, [false, true], {}, class: 'form-control form-control-sm' %>
     </div>
 
-    <div class="form-group col-md-1">
+    <div class="form-group form-group-sm col-md-1">
       <%= f.label :remove %>
-      <%= link_to_remove_association '<i class="material-icons">close</i>'.html_safe, f %>
+      <%= link_to_remove_association '<i class="material-icons icon-20pt">close</i>'.html_safe, f %>
     </div>
   </div>
 </div>
