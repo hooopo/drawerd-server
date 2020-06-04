@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :admin, only: [:index]
   resources :registrations, only: [:new, :create]
   resources :sessions, only: [:new, :create]
   delete "sign_out" => "sessions#destroy", as: :destroy_session
