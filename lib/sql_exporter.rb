@@ -11,10 +11,10 @@ class SqlExporter
     <<~ERB
       <% tables.each do |table| %>
       Table <%= table.name %> {
-        <%= table.to_dbml_option %>
-        <% table.columns.each do |column| %>
+        <% table.columns.order("id asc").each do |column| %>
           <%= column.name  %> <%= column.column_type %> <%= column.to_dbml_option %>
         <% end %>
+        <%= table.to_dbml_option %>
       }
       <% end %>
     ERB
