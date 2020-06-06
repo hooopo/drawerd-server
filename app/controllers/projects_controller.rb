@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../../lib/sql_exporter"
+
 class ProjectsController < ApplicationController
   before_action :redirect_to_subdomain
   skip_before_action :authenticate_user!, only: [:render_svg]
@@ -51,6 +53,12 @@ class ProjectsController < ApplicationController
     else
       send_file path, type: "image/svg+xml", disposition: "inline"
     end
+  end
+
+  def render_sql
+    @project = current_company.projects.includes({ tables: [:columns, :group], relationships: [:column, :relation_column] }).find(params[:id])
+    ddl_file = SqlExporter.new(@project).ddl_file
+    send_file ddl_file, filename: "#{@project.name}.sql"
   end
 
   def show

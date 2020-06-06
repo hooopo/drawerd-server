@@ -52,6 +52,18 @@ class Column < ApplicationRecord
     HTML
   end
 
+  def to_dbml_option
+    opt = []
+    opt << "pk" if is_pk
+    opt << "not null" if not nullable
+    opt << "note: #{comment.inspect}" if comment.present?
+    if opt.present?
+      "[#{opt.join(", ")}]"
+    else
+      ""
+    end
+  end
+
   def ext_info
     null = if nullable
       "null"

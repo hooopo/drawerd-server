@@ -56,6 +56,10 @@ class Table < ApplicationRecord
     end.join("\n")
   end
 
+  def to_dbml_option
+    "note: #{comment.inspect}" if comment.present?
+  end
+
   def display_name(mode = :full)
     output = if schema == "public"
       name

@@ -42,7 +42,7 @@ class TablesController < ApplicationController
     @table.destroy
     render js: %Q|$('#edit-table').modal('toggle');$("#svg-object").attr("data", $("#svg-object").attr('data'));|
   rescue ActiveRecord::InvalidForeignKey
-    render js: %Q|alert("You need destroy relationship of this table first.")|
+    render js: 'alert("You need destroy relationship of this table first.")'
   end
 
   def table_params
