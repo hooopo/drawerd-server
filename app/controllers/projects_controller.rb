@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
   def update
     @project = current_company.projects.find(params[:id])
     if @project.update(project_update_params)
-      redirect_to project_path(@project), notice: "Project successfully updated"
+      redirect_to project_path(@project)
     else
       flash.now[:notice] = "fail"
       render :edit
@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
     @project = current_user.projects.new(project_create_params)
     @project.company = current_user.company
     if @project.save
-      redirect_to project_path(@project), notice: "Project successfully created"
+      redirect_to project_path(@project)
     else
       flash.now[:notice] = "fail"
       render :new

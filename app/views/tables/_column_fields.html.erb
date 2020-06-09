@@ -7,7 +7,7 @@
 
     <div class="form-group form-group-sm col-md-3">
       <%= f.label :column_type %>
-      <%= f.select :column_type, Column::TYPES, {}, class: 'form-control form-control-sm' %>
+      <%= f.select :column_type, Column::TYPES[@project.adapter.to_sym], {}, class: 'form-control form-control-sm' %>
     </div>
 
     <div class="form-group form-group-sm col-md-3">
