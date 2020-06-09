@@ -73,7 +73,6 @@ class Column < ApplicationRecord
       "polygon",
       "circle",
       "bit",
-      "bit varying",
       "money",
       "interval"
     ],
