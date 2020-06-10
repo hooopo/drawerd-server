@@ -73,7 +73,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_update_params
-    params.fetch(:project, {}).permit(:bg_color, :table_header_color, :table_body_color, :arrow_color)
+    params.fetch(:project, {}).permit(:bg_color, :table_header_color, :table_body_color, :arrow_color, :export_foreign_key)
   end
 
   def project_create_params

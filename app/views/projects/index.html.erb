@@ -21,7 +21,7 @@
         <td><%= project.name %></td>
         <td><span class="badge badge-info"><%= project.adapter %></span></td>
         <td><%= project.created_at %></td>
-        <td><%= link_to "Edit", edit_project_path(project), class: 'btn btn-sm btn-outline-secondary' %></td>
+        <td><%= link_to "Setting", edit_project_path(project), class: 'btn btn-sm btn-outline-secondary' %></td>
         <td><%= link_to "Enter", project_path(project), class: 'btn btn-sm btn-outline-primary' %></td>
       </tr>
     <% end %>

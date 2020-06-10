@@ -42,4 +42,19 @@ class Relationship < ApplicationRecord
   def virtual?
     not (column && relation_column)
   end
+
+  def to_dbml_ref
+    ref_type = many? ? " < " : " - "
+    if not virtual?
+      "Ref: #{[table_desc, relation_table_desc].join(ref_type)}"
+    end
+  end
+
+  def table_desc
+    [table.name, column.name].join(".")
+  end
+
+  def relation_table_desc
+    [relation_table.name, relation_column.name].join(".")
+  end
 end

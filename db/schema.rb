@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_20_230211) do
+ActiveRecord::Schema.define(version: 2020_06_09_192020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 2020_05_20_230211) do
     t.string "table_header_color"
     t.string "table_body_color"
     t.string "arrow_color"
+    t.boolean "export_foreign_key", default: true
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end

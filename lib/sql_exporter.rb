@@ -17,11 +17,18 @@ class SqlExporter
         <%= table.to_dbml_option %>
       }
       <% end %>
+      <% relationships.each do |r| %>
+        <%= r.to_dbml_ref if project.export_foreign_key? %>
+      <% end %>
     ERB
   end
 
   def tables
     project.tables.order("id asc")
+  end
+
+  def relationships
+    project.relationships
   end
 
   def dbml

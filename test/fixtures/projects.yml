@@ -7,6 +7,7 @@
 #  arrow_color                     :string
 #  auto_draw                       :boolean          default(FALSE)
 #  bg_color                        :string
+#  export_foreign_key              :boolean          default(TRUE)
 #  import_sql_data                 :jsonb
 #  name                            :string
 #  relation_csv_data               :jsonb
