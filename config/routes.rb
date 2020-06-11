@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   delete "sign_out" => "sessions#destroy", as: :destroy_session
   post "redirect/go" => "redirect#go"
   post "payment_webhook" => "payment#webhook"
+  get "home" => "home#index"
 
   root to: "sessions#new"
 

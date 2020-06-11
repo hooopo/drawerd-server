@@ -3,7 +3,7 @@
 class SessionsController < ApplicationController
   layout "blank"
   skip_before_action :authenticate_user!, only: [:new, :create]
-  before_action :check_subdomain, only: [:create, :destroy]
+  before_action :check_subdomain, only: [:create]
 
   def create
     @user = @company.users.where(email: user_params[:email]).first
@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
 
   def check_subdomain
     unless request.subdomain.present? && Company.where(subdomain: request.subdomain).first
-      redirect_to(new_sessions_path, notice: "No Subdomain")
+      redirect_to(new_session_path, notice: "No Subdomain")
     else
       @company = Company.where(subdomain: request.subdomain).first
     end
