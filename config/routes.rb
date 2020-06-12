@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post "payment_webhook" => "payment#webhook"
   get "home" => "home#index"
 
-  root to: "sessions#new"
+  root to: "home#index"
 
   constraints(Subdomain) do
     root to: "projects#index"
