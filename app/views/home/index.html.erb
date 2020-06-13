@@ -4,9 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Webpixels">
-    <title>Quick – Website UI Kit (FREE)</title>
+    <meta name="description" content="database diagram builder for developers to create, collaborate and visualize entity relationship diagrams.">
+    <meta name="keywords" content="database diagram, database design, data analysts, develoepers, free tools, database schema design">
+
+    <meta property="og:title" content="DrawERD - ✨ Database schema diagrams">
+    <meta property="og:description" content="Simple, beautiful database diagram editor for developers to create, collaborate and visualize their entity relationship diagrams.">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="https://drawerd.com">
+    <meta property="og:site_name" content="DrawERD">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DrawerdHq">
+    <meta name="twitter:creator" content="@hooopo">
+    <title>DrawERD -✨ Makes it easy to visualize your database structure</title>
     <!-- Preloader -->
     <style>
         @keyframes hidePreloader {
@@ -85,15 +95,15 @@
         </div>
     </div>
     <!-- Go Pro -->
-    <a href="https://webpixels.io/themes/quick-website-ui-kit" class="btn btn-block btn-dark text-truncate rounded-0 py-2 d-none d-lg-block" style="z-index: 1000;" target="_blank">
+<!--     <a href="https://webpixels.io/themes/quick-website-ui-kit" class="btn btn-block btn-dark text-truncate rounded-0 py-2 d-none d-lg-block" style="z-index: 1000;" target="_blank">
         <strong>This is a free demo.</strong> Click here to open the full version →
-    </a>
+    </a> -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
             <!-- Brand -->
             <a class="navbar-brand" href="index.html">
-                <img alt="Image placeholder" src="assets/img/brand/dark.svg" id="navbar-logo">
+                <img alt="Image placeholder" src="assets/img/brand/logo.png" id="navbar-logo">
             </a>
             <!-- Toggler -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,12 +126,15 @@
                         </div>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="docs/index.html">Docs</a>
+                        <a class="nav-link" href="https://help.drawerd.com">Docs</a>
                     </li>
                 </ul>
                 <!-- Button -->
-                <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="https://github.com/webpixels/quick-website-ui-kit-demo/archive/master.zip">
-                    Download Free
+                <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="<%= new_session_path %>">
+                    Sign up Free
+                </a>
+                <a class="navbar-btn btn btn-sm btn-secondary d-none d-lg-inline-block ml-3" href="<%= new_session_path %>">
+                    Login
                 </a>
                 <!-- Mobile button -->
                 <div class="d-lg-none text-center">
@@ -143,7 +156,7 @@
                 <div class="col-12 col-md-7 col-lg-6 order-md-1 pr-md-5">
                     <!-- Heading -->
                     <h1 class="display-4 text-center text-md-left mb-3">
-                        It's time to amplify your <strong class="text-primary">online business</strong>
+                        Create, visualize and collaborate on your database entity relationship diagrams.
                     </h1>
                     <!-- Text -->
                     <p class="lead text-center text-md-left text-muted">
@@ -151,11 +164,11 @@
                     </p>
                     <!-- Buttons -->
                     <div class="text-center text-md-left mt-5">
-                        <a href="https://webpixels.io/themes/quick-free-bootstrap-theme" class="btn btn-primary btn-icon" target="_blank">
+                        <a href="<%= new_registration_path %>" class="btn btn-primary btn-icon" target="_blank">
                             <span class="btn-inner--text">Get started</span>
                             <span class="btn-inner--icon"><i data-feather="chevron-right"></i></span>
                         </a>
-                        <a href="https://webpixels.io/illustrations" class="btn btn-neutral btn-icon d-none d-lg-inline-block" target="_blank">See Illustrations</a>
+                        <a href="https://help.drawerd.com" class="btn btn-neutral btn-icon d-none d-lg-inline-block" target="_blank">See Docs</a>
                     </div>
                 </div>
             </div>
@@ -168,7 +181,7 @@
             <div class="row mb-5 justify-content-center text-center">
                 <div class="col-lg-6">
                     <span class="badge badge-soft-success badge-pill badge-lg">
-                        Get started
+                        Features
                     </span>
                     <h2 class=" mt-4">Carefuly crafted components ready to use in your project</h2>
                     <div class="mt-2">
@@ -184,8 +197,8 @@
                             <div class="pt-4 pb-5">
                                 <img src="assets/img/svg/illustrations/illustration-5.svg" class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
                             </div>
-                            <h5 class="h4 lh-130 mb-3">Unleash you creativity</h5>
-                            <p class="text-muted mb-0">Quick Website UI Kit (FREE) contains components and pages that are easy to customize and change.</p>
+                            <h5 class="h4 lh-130 mb-3">Teamwork</h5>
+                            <p class="text-muted mb-0">Easily visualize your database structure. Having a living document of your app schema helps when architecting a new feature or onboarding a new team member.</p>
                         </div>
                     </div>
                 </div>
@@ -195,8 +208,8 @@
                             <div class="pt-4 pb-5">
                                 <img src="assets/img/svg/illustrations/illustration-6.svg" class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
                             </div>
-                            <h5 class="h4 lh-130 mb-3">Get more results</h5>
-                            <p class="text-muted mb-0">Quick Website UI Kit (FREE) contains components and pages that are easy to customize and change.</p>
+                            <h5 class="h4 lh-130 mb-3">Auto Layout</h5>
+                            <p class="text-muted mb-0">No need to drag and drop cards manually, DrawERD will automatically render a fresh and beautiful SVG diagram according to your entities and relationships.</p>
                         </div>
                     </div>
                 </div>
@@ -206,14 +219,54 @@
                             <div class="pt-4 pb-5">
                                 <img src="assets/img/svg/illustrations/illustration-7.svg" class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
                             </div>
-                            <h5 class="h4 lh-130 mb-3">Increase your audience</h5>
-                            <p class="text-muted mb-0">Quick Website UI Kit (FREE) contains components and pages that are easy to customize and change.</p>
+                            <h5 class="h4 lh-130 mb-3">Integrate with your SQL Databases</h5>
+                            <p class="text-muted mb-0">Quickly generate your diagrams from SQL dump files.</p>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body pb-5">
+                            <div class="pt-4 pb-5">
+                                <img src="assets/img/svg/illustrations/illustration-8.svg" class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
+                            </div>
+                            <h5 class="h4 lh-130 mb-3">Share everywhere</h5>
+                            <p class="text-muted mb-0">Share your diagrams online with your colleagues and customers easily.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body pb-5">
+                            <div class="pt-4 pb-5">
+                                <img src="assets/img/svg/illustrations/illustration-9.svg" class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
+                            </div>
+                            <h5 class="h4 lh-130 mb-3">Export to SVG & DDL</h5>
+                            <p class="text-muted mb-0">Export ERD to SQL DDL file, MySQL, Postgresql and SQL Server supported.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body pb-5">
+                            <div class="pt-4 pb-5">
+                                <img src="assets/img/svg/illustrations/illustration-10.svg" class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
+                            </div>
+                            <h5 class="h4 lh-130 mb-3">Large project friendly</h5>
+                            <p class="text-muted mb-0">If your database already has hundreds of tables and you plan to migrate from a monolithic application to microservices, then the grouping function of DrawERD is an optimal tool.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
+
+
     <section class="slice slice-lg">
         <div class="container">
             <div class="py-6">
@@ -619,11 +672,11 @@
                 <div class="col-lg-8">
                     <!-- Title -->
                     <h2 class="h1 strong-600">
-                        Complete features at your hand
+                        Pricing
                     </h2>
                     <!-- Text -->
                     <p class="text-muted">
-                        Thousands of developers around the world have already made Quick the main tool for building websites.
+                        Start with free trial 14 days. Cancel at anytime.
                     </p>
                 </div>
             </div>
@@ -632,44 +685,72 @@
                 <div class="col-lg-4 col-md">
                     <div class="card card-pricing text-center px-3 hover-scale-110">
                         <div class="card-header py-5 border-0 delimiter-bottom">
-                            <div class="h1 text-center mb-0">$<span class="price font-weight-bolder">49</span></div>
-                            <span class="h6 text-muted">Standard License</span>
+                            <div class="h1 text-center mb-0">$<span class="price font-weight-bolder">0</span></div>
+                            <span class="h6 text-muted">Free</span>
                         </div>
                         <div class="card-body">
                             <ul class="list-unstyled text-sm mb-4">
-                                <li class="py-2">1 end product</li>
-                                <li class="py-2">Use for personal or a client</li>
-                                <li class="py-2">Use in a free end product</li>
-                                <li class="py-2">6 months technical support</li>
+                                <li class="py-2">Up to 100 diagrams</li>
+                                <li class="py-2">Private & Embedded diagrams</li>
+                                <li class="py-2">Table Group</li>
+                                <li class="py-2">Custom diagram colors</li>
+                                <li class="py-2">SQL import</li>
+                                <li class="py-2">Export to SVG</li>
+                                <li class="py-2">Up to 5 team members</li>
                             </ul>
-                            <a href="#" class="btn btn-sm btn-warning hover-translate-y-n3 hover-shadow-lg mb-3">Purchase now</a>
+                            <a href="<%= new_registration_path %>" class="btn btn-sm btn-warning hover-translate-y-n3 hover-shadow-lg mb-3">Purchase now</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md">
                     <div class="card card-pricing bg-dark text-center px-3 border-0 hover-scale-110">
                         <div class="card-header py-5 border-0 delimiter-bottom">
-                            <div class="h1 text-white text-center mb-0">$<span class="price font-weight-bolder">590</span></div>
-                            <span class="h6 text-white">Extended License</span>
+                            <div class="h1 text-white text-center mb-0">$<span class="price font-weight-bolder">5 / <sub>mo</sub></span></div>
+                            <span class="h6 text-white">Pro</span>
                         </div>
                         <div class="card-body">
-                            <ul class="list-unstyled text-white text-sm opacity-8 mb-4">
-                                <li class="py-2">1 end product</li>
-                                <li class="py-2">Use for personal or a client</li>
-                                <li class="py-2">Use in a free end product</li>
-                                <li class="py-2">Use in an end product that is <strong class="text-success text-underline--dashed">sold</strong></li>
-                                <li class="py-2">6 months technical support</li>
+                            <ul class="list-unstyled text-sm mb-4">
+                                <li class="py-2">Up to 300 diagrams</li>
+                                <li class="py-2">Private & Embedded diagrams</li>
+                                <li class="py-2">Table Group</li>
+                                <li class="py-2">Custom diagram colors</li>
+                                <li class="py-2">SQL import</li>
+                                <li class="py-2">Export to SVG</li>
+                                <li class="py-2">Up to 50 team members</li>
                             </ul>
-                            <a href="#" class="btn btn-sm btn-white hover-translate-y-n3 hover-shadow-lg mb-3">Purchase now</a>
+                            <a href="<%= new_registration_path %>" class="btn btn-sm btn-warning hover-translate-y-n3 hover-shadow-lg mb-3">Purchase now</a>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md">
+                    <div class="card card-pricing text-center px-3 hover-scale-110">
+                        <div class="card-header py-5 border-0 delimiter-bottom">
+                            <div class="h1 text-center mb-0">$<span class="price font-weight-bolder">49 / <sub>mo</sub></span></div>
+                            <span class="h6 text-muted">Enterprise</span>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled text-sm mb-4">
+                                <li class="py-2">Unlimitted diagrams</li>
+                                <li class="py-2">Private & Embedded diagrams</li>
+                                <li class="py-2">Table Group</li>
+                                <li class="py-2">Custom diagram colors</li>
+                                <li class="py-2">SQL import</li>
+                                <li class="py-2">Export to SVG</li>
+                                <li class="py-2">Unlimitted team members</li>
+                                <li class="py-2">Custom services</li>
+                            </ul>
+                            <a href="<%= new_registration_path %>" class="btn btn-sm btn-warning hover-translate-y-n3 hover-shadow-lg mb-3">Purchase now</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="mt-5 text-center">
                 <p class="mb-2">
-                    Both pricings contains all 6 months free support. Need more?
+                    Building an open source project? We offer a free plan with higher limits to support open source projects.
                 </p>
-                <a href="#" class="text-primary text-underline--dashed">Contact us<i data-feather="arrow-right" class="ml-2"></i></a>
+                <a href="https://twitter.com/hooopo" class="text-primary text-underline--dashed">Contact us<i data-feather="arrow-right" class="ml-2"></i></a>
             </div>
         </div>
     </section>
@@ -687,30 +768,20 @@
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <!-- Theme's logo -->
                         <a href="index.html">
-                            <img alt="Image placeholder" src="assets/img/brand/light.svg" id="footer-logo">
+                            <img alt="Image placeholder" width="100" src="assets/img/brand/logo_box.png" id="footer-logo">
                         </a>
                         <!-- Webpixels' mission -->
-                        <p class="mt-4 text-sm opacity-8 pr-lg-4">Webpixels attempts to bring the best development experience to designers and developers by offering the tools needed for having a quick and solid start in most web projects.</p>
+                        <p class="mt-4 text-sm opacity-8 pr-lg-4">Create, visualize and collaborate on your database entity relationship diagrams.</p>
                         <!-- Social -->
                         <ul class="nav mt-4">
                             <li class="nav-item">
-                                <a class="nav-link pl-0" href="https://dribbble.com/webpixels" target="_blank">
-                                    <i class="fab fa-dribbble"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://github.com/webpixels" target="_blank">
+                                <a class="nav-link" href="https://github.com/drawerd" target="_blank">
                                     <i class="fab fa-github"></i>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="https://www.instagram.com/webpxs" target="_blank">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://www.facebook.com/webpixels" target="_blank">
-                                    <i class="fab fa-facebook"></i>
+                                <a class="nav-link" href="https://twitter.com/hooopo" target="_blank">
+                                    <i class="fab fa-twitter"></i>
                                 </a>
                             </li>
                         </ul>
@@ -746,7 +817,7 @@
                 <div class="row align-items-center justify-content-md-between pb-4">
                     <div class="col-md-6">
                         <div class="copyright text-sm font-weight-bold text-center text-md-left">
-                            &copy; 2020 <a href="https://webpixels.io" class="font-weight-bold" target="_blank">Webpixels</a>. All rights reserved
+                            &copy; 2020 <a href="https://drawerd.com" class="font-weight-bold" target="_blank">DrawERD</a>. All rights reserved
                         </div>
                     </div>
                     <div class="col-md-6">

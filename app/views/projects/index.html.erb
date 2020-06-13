@@ -9,6 +9,7 @@
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Adapter</th>
+      <th scope="col">Tables Count</th>
       <th scope="col">Created At</th>
       <th scope="col"></th>
       <th scope="col"></th>
@@ -20,6 +21,7 @@
         <th scope="row"><%= project.id %></th>
         <td><%= project.name %></td>
         <td><span class="badge badge-info"><%= project.adapter %></span></td>
+        <td><%= project.tables.count %></td>
         <td><%= project.created_at %></td>
         <td><%= link_to "Setting", edit_project_path(project), class: 'btn btn-sm btn-outline-secondary' %></td>
         <td><%= link_to "Enter", project_path(project), class: 'btn btn-sm btn-outline-primary' %></td>
