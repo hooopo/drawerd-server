@@ -102,7 +102,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
             <!-- Brand -->
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <img alt="Image placeholder" src="landing_assets/img/brand/logo.png" id="navbar-logo">
             </a>
             <!-- Toggler -->
@@ -143,15 +143,12 @@
                 <% end %>
                 <!-- Mobile button -->
                 <div class="d-lg-none text-center">
-                    <a class="btn btn-block btn-sm btn-primary" href="<%= new_registration_path %>">
-                        Sign up Free
+                    <a class="btn btn-block btn-sm btn-primary" href="<%= new_registration_path %>">Sign up Free
                     </a>
-                    <a class="btn btn-block btn-sm btn-secondary" href="<%= new_session_path %>">
-                        Login
+                    <a class="btn-block btn-sm btn-secondary" href="<%= new_session_path %>">Login
                     </a>
                     <% if current_user %>
-                        <a class="btn btn-block btn-sm btn-dark" href="<%= projects_url(subdomain: current_company.subdomain) %>">
-                            Go to App
+                        <a class="btn btn-block btn-sm btn-dark" href="<%= projects_url(subdomain: current_company.subdomain) %>">Go to App
                         </a>
                     <% end %>
                 </div>
