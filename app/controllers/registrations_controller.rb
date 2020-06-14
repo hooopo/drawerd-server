@@ -32,7 +32,7 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       @invitation.update(invitee: @user) if @invitation
-      cookies[:remember_token] = {
+      cookies[:remember_token_v2] = {
         value: @user.remember_token,
         domain: Subdomain.main(request),
         expires: 1.year.from_now.utc

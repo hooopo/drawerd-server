@@ -9,13 +9,13 @@ class SessionsController < ApplicationController
     @user = @company.users.where(email: user_params[:email]).first
     if @user && @user.authenticate(user_params[:password])
       if user_params[:remember_me]
-        cookies[:remember_token] = {
+        cookies[:remember_token_v2] = {
           value: @user.remember_token,
           domain: Subdomain.main(request),
           expires: 1.year.from_now.utc
         }
       else
-        cookies[:remember_token] = {
+        cookies[:remember_token_v2] = {
           value: @user.remember_token,
           domain: Subdomain.main(request)
         }
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    cookies[:remember_token] = {
+    cookies[:remember_token_v2] = {
       value: nil,
       domain: Subdomain.main(request)
     }

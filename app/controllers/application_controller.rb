@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_user
-      @current_user ||= User.where(remember_token: cookies[:remember_token]).first if cookies[:remember_token]
+      @current_user ||= User.where(remember_token: cookies[:remember_token_v2]).first if cookies[:remember_token_v2]
     end
 
     def current_company
