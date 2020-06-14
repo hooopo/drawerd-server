@@ -112,7 +112,7 @@
             <!-- Collapse -->
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
-                    <li class="nav-item ">
+  <!--                   <li class="nav-item ">
                         <a class="nav-link" href="index.html">Overview</a>
                     </li>
                     <li class="nav-item dropdown dropdown-animate" data-toggle="hover">
@@ -124,18 +124,23 @@
                             <div class="dropdown-divider"></div>
                             <a href="login.html" class="dropdown-item">Login</a>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="nav-item ">
                         <a class="nav-link" href="https://help.drawerd.com">Docs</a>
                     </li>
                 </ul>
                 <!-- Button -->
-                <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="<%= new_session_path %>">
+                <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="<%= new_registration_path %>">
                     Sign up Free
                 </a>
                 <a class="navbar-btn btn btn-sm btn-secondary d-none d-lg-inline-block ml-3" href="<%= new_session_path %>">
                     Login
                 </a>
+                <% if current_user %>
+                    <a class="navbar-btn btn btn-sm btn-dark d-none d-lg-inline-block ml-3" href="<%= projects_url(subdomain: current_company.subdomain) %>">
+                        Go to App
+                    </a>
+                <% end %>
                 <!-- Mobile button -->
                 <div class="d-lg-none text-center">
                     <a href="https://webpixels.io/themes/quick-website-ui-kit" class="btn btn-block btn-sm btn-warning">See more details</a>
@@ -183,9 +188,9 @@
                     <span class="badge badge-soft-success badge-pill badge-lg">
                         Features
                     </span>
-                    <h2 class=" mt-4">Carefuly crafted components ready to use in your project</h2>
+                    <h2 class=" mt-4">Why DrawERD?</h2>
                     <div class="mt-2">
-                        <p class="lead lh-180">Use Atomic Design to build components, sections and, then, pages.</p>
+                        <p class="lead lh-180"></p>
                     </div>
                 </div>
             </div>
@@ -272,9 +277,9 @@
             <div class="py-6">
                 <div class="row row-grid justify-content-between align-items-center">
                     <div class="col-lg-5 order-lg-2">
-                        <h5 class="h3">Need a quick admin panel for your website?</h5>
+                        <h5 class="h3">Need break a Monolith into Microservices?</h5>
                         <p class="lead my-4">
-                            With Quick you get components and examples, including tons of variables that will help you customize this theme with ease.
+                            If your database already has hundreds of tables and you plan to migrate from a monolithic application to a MicroService, then DrawERD's grouping function is the best tool. By simulating the grouping of modules, you can clearly determine which entity is placed in which service More reasonable.
                         </p>
                         <ul class="list-unstyled mb-0">
                             <li class="py-2">
@@ -285,7 +290,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <span class="h6 mb-0">Perfect for modern startups</span>
+                                        <span class="h6 mb-0">Perfect for large project</span>
                                     </div>
                                 </div>
                             </li>
@@ -297,7 +302,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <span class="h6 mb-0">Ready to be customized</span>
+                                        <span class="h6 mb-0">Ready to be break monolith to microservices</span>
                                     </div>
                                 </div>
                             </li>
@@ -306,7 +311,7 @@
                     <div class="col-lg-6 order-lg-1">
                         <div class="card mb-0 mr-lg-5">
                             <div class="card-body p-2">
-                                <img alt="Image placeholder" src="assets/img/theme/light/screen-1-1000x800.jpg" class="img-fluid shadow rounded">
+                                <img alt="Image placeholder" src="assets/img/brand/full.png" class="img-fluid shadow rounded">
                             </div>
                         </div>
                     </div>
@@ -315,53 +320,16 @@
             <div class="py-6">
                 <div class="row row-grid justify-content-between align-items-center">
                     <div class="col-lg-5">
-                        <h5 class="h3">A modern project management dashboard</h5>
+                        <h5 class="h3">Need to ignore the details and view the macro picture?</h5>
                         <p class="lead my-4">
-                            With Quick you get components and examples, including tons of variables that will help you customize this theme with ease.
+                            With simple mode, you can ignore the details and view the macro view, showing only the table and relationships.
                         </p>
-                        <ul class="list-unstyled mb-0">
-                            <li class="py-2">
-                                <div class="d-flex align-items-center">
-                                    <div>
-                                        <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
-                                            <i class="fas fa-file-invoice"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <span class="h6 mb-0">Perfect for modern startups</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="py-2">
-                                <div class="d-flex align-items-center">
-                                    <div>
-                                        <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
-                                            <i class="fas fa-store-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <span class="h6 mb-0">Ready to be customized</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="py-2">
-                                <div class="d-flex align-items-center">
-                                    <div>
-                                        <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
-                                            <i class="fas fa-store-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <span class="h6 mb-0">Designed for every devices</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+
                     </div>
                     <div class="col-lg-6">
                         <div class="card mb-0 ml-lg-5">
                             <div class="card-body p-2">
-                                <img alt="Image placeholder" src="assets/img/theme/light/screen-2-1000x800.jpg" class="img-fluid shadow rounded">
+                                <img alt="Image placeholder" src="assets/img/brand/simple.png" class="img-fluid shadow rounded">
                             </div>
                         </div>
                     </div>
@@ -369,32 +337,8 @@
             </div>
         </div>
     </section>
-    <section class="slice slice-lg bg-section-dark pt-5 pt-lg-8">
-        <!-- SVG separator -->
-        <div class="shape-container shape-line shape-position-top shape-orientation-inverse">
-            <svg width="2560px" height="100px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" viewBox="0 0 2560 100" style="enable-background:new 0 0 2560 100;" xml:space="preserve" class="">
-                <polygon points="2560 0 2560 100 0 100"></polygon>
-            </svg>
-        </div>
-        <!-- Container -->
-        <div class="container position-relative zindex-100">
-            <div class="col">
-                <div class="row justify-content-center">
-                    <div class="col-md-10 text-center">
-                        <div class="mt-4 mb-6">
-                            <h2 class="h1 text-white">
-                                Are you ready to grow faster?
-                            </h2>
-                            <h4 class="text-white mt-3">Create your own experience</h4>
-                            <!-- Play button -->
-                            <a href="#" class="btn btn-primary btn-icon mt-4">Learn more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="slice pt-0">
+    
+    <!-- <section class="slice pt-0">
         <div class="container position-relative zindex-100">
             <div class="row">
                 <div class="col-xl-4 col-sm-6 mt-n7">
@@ -491,181 +435,8 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="slice slice-lg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <span class="badge badge-primary badge-pill">Key features</span>
-                    <h5 class="lh-180 mt-4 mb-6">Quick is a premium HTML template that includes adaptable components and pages for various industries, plus new ones each month.</h5>
-                </div>
-            </div>
-            <!-- Features -->
-            <div class="row mx-lg-n4">
-                <!-- Features - Col 1 -->
-                <div class="col-lg-4 col-md-6 px-lg-4">
-                    <div class="card shadow-none">
-                        <div class="p-3 d-flex">
-                            <div>
-                                <div class="icon icon-shape rounded-circle bg-warning text-white mr-4">
-                                    <i data-feather="check"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <span class="h6">100% Responsive</span>
-                                <p class="text-sm text-muted mb-0">
-                                    Built to be customized.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 px-lg-4">
-                    <div class="card shadow-none">
-                        <div class="p-3 d-flex">
-                            <div>
-                                <div class="icon icon-shape rounded-circle bg-primary text-white mr-4">
-                                    <i data-feather="check"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <span class="h6">Based on Bootstrap 4</span>
-                                <p class="text-sm text-muted mb-0">
-                                    Built to be customized.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 px-lg-4">
-                    <div class="card shadow-none">
-                        <div class="p-3 d-flex">
-                            <div>
-                                <div class="icon icon-shape rounded-circle bg-danger text-white mr-4">
-                                    <i data-feather="check"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <span class="h6">Built with SASS</span>
-                                <p class="text-sm text-muted mb-0">
-                                    Built to be customized.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 px-lg-4">
-                    <div class="card shadow-none">
-                        <div class="p-3 d-flex">
-                            <div>
-                                <div class="icon icon-shape rounded-circle bg-success text-white mr-4">
-                                    <i data-feather="check"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <span class="h6">300+ components</span>
-                                <p class="text-sm text-muted mb-0">
-                                    Built to be customized.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 px-lg-4">
-                    <div class="card shadow-none">
-                        <div class="p-3 d-flex">
-                            <div>
-                                <div class="icon icon-shape rounded-circle bg-info text-white mr-4">
-                                    <i data-feather="check"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <span class="h6">23+ widgets</span>
-                                <p class="text-sm text-muted mb-0">
-                                    Built to be customized.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 px-lg-4">
-                    <div class="card shadow-none">
-                        <div class="p-3 d-flex">
-                            <div>
-                                <div class="icon icon-shape rounded-circle bg-warning text-white mr-4">
-                                    <i data-feather="check"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <span class="h6">Bootstrap Flexbox Grid</span>
-                                <p class="text-sm text-muted mb-0">
-                                    Built to be customized.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Features - Col 3 -->
-                <div class="col-lg-4 col-md-6 px-lg-4">
-                    <div class="card shadow-none">
-                        <div class="p-3 d-flex">
-                            <div>
-                                <div>
-                                    <div class="icon icon-shape rounded-circle bg-info text-white mr-4">
-                                        <i data-feather="check"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <span class="h6">Animate CSS</span>
-                                <p class="text-sm text-muted mb-0">
-                                    Built to be customized.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 px-lg-4">
-                    <div class="card shadow-none">
-                        <div class="p-3 d-flex">
-                            <div>
-                                <div>
-                                    <div class="icon icon-shape rounded-circle bg-danger text-white mr-4">
-                                        <i data-feather="check"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <span class="h6">Integrated plugins</span>
-                                <p class="text-sm text-muted mb-0">
-                                    Built to be customized.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 px-lg-4">
-                    <div class="card shadow-none">
-                        <div class="p-3 d-flex">
-                            <div>
-                                <div>
-                                    <div class="icon icon-shape rounded-circle bg-primary text-white mr-4">
-                                        <i data-feather="check"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <span class="h6">Smart HTML markup</span>
-                                <p class="text-sm text-muted mb-0">
-                                    Built to be customized.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </section> -->
+    
     <section class="slice slice-lg bg-section-secondary">
         <div class="container text-center">
             <div class="row justify-content-center mb-6">

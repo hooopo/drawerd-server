@@ -130,9 +130,9 @@ class Column < ApplicationRecord
   def to_html
     <<~HTML
       <TR>
-        <TD port="left#{self.id}" bgcolor='#01f800' ALIGN="LEFT">#{name}</TD>
-        <TD bgcolor='#01f800' ALIGN="LEFT">#{column_type}</TD>
-        <TD port="right#{self.id}" bgcolor='#01f800' ALIGN="RIGHT">#{ext_info}</TD>
+        <TD port="left#{self.id}" bgcolor='#{table.project.table_body_color_with_default}' ALIGN="LEFT">#{name}</TD>
+        <TD bgcolor='#{table.project.table_body_color_with_default}' ALIGN="LEFT">#{column_type}</TD>
+        <TD port="right#{self.id}" bgcolor='#{table.project.table_body_color_with_default}' ALIGN="RIGHT">#{ext_info}</TD>
       </TR>
     HTML
   end

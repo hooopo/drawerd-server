@@ -42,7 +42,6 @@ class Paddle
 
     # verify the data
     digest    = OpenSSL::Digest::SHA1.new
-    binding.pry
     pub_key   = OpenSSL::PKey::RSA.new(public_key).public_key
     verified  = pub_key.verify(digest, signature, data_serialized)
     verified

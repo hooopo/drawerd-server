@@ -9,9 +9,16 @@ class SessionsController < ApplicationController
     @user = @company.users.where(email: user_params[:email]).first
     if @user && @user.authenticate(user_params[:password])
       if user_params[:remember_me]
-        cookies.permanent[:remember_token] = @user.remember_token
+        cookies[:remember_token] = {
+          value: @user.remember_token,
+          domain: Subdomain.main(request),
+          expires: 1.year.from_now.utc
+        }
       else
-        cookies[:remember_token] = @user.remember_token
+        cookies[:remember_token] = {
+          value: @user.remember_token,
+          domain: Subdomain.main(request)
+        }
       end
       redirect_to projects_path
     else
@@ -21,8 +28,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    cookies[:remember_token] = nil
-    redirect_to root_path, notice: "Sign out successed"
+    cookies[:remember_token] = {
+      value: nil,
+      domain: Subdomain.main(request)
+    }
+    redirect_to root_url(subdomain: nil)
   end
 
   def new

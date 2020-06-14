@@ -13870,7 +13870,7 @@ textarea[resize="horizontal"] {
 
 @media (max-width: 991.98px) {
   .navbar-expand-lg .navbar-brand img {
-    height: 1.75rem; }
+    height: 3.75rem; }
   .navbar-expand-lg .navbar-brand.dropdown-toggle:after {
     float: none;
     font-size: 1rem;
@@ -13959,7 +13959,7 @@ textarea[resize="horizontal"] {
 
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-brand img {
-    height: 1.75rem; }
+    height: 3.75rem; }
   .navbar-expand-lg .navbar-brand.dropdown-toggle:after {
     display: none; }
   .navbar-expand-lg .navbar-nav .nav-link {
@@ -15118,7 +15118,7 @@ article p {
 
 @media (max-width: 991.98px) {
   .navbar-expand-lg .navbar-brand img {
-    height: 1.75rem; }
+    height: 3.75rem; }
   .navbar-expand-lg .navbar-brand.dropdown-toggle:after {
     float: none;
     font-size: 1rem;
@@ -15207,7 +15207,7 @@ article p {
 
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-brand img {
-    height: 1.75rem; }
+    height: 3.75rem; }
   .navbar-expand-lg .navbar-brand.dropdown-toggle:after {
     display: none; }
   .navbar-expand-lg .navbar-nav .nav-link {

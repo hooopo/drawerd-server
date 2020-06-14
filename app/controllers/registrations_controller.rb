@@ -32,8 +32,12 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       @invitation.update(invitee: @user) if @invitation
-      cookies.permanent[:remember_token] = @user.remember_token
-      redirect_to root_path(subdomain: @user.company.subdomain), notice: "Sign up successed"
+      cookies[:remember_token] = {
+        value: @user.remember_token,
+        domain: Subdomain.main(request),
+        expires: 1.year.from_now.utc
+      }
+      redirect_to projects_url(subdomain: @user.company.subdomain, only_path: false)
     else
       flash[:notice] = "Sign up failed"
       if @invitation
