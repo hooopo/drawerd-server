@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       end
 
       resources :tables, only: [:new, :create, :destroy, :edit, :update]
-      resources :groups, only: [:new, :create, :destroy]
+      resources :groups, only: [:new, :create, :destroy, :edit, :update]
       resources :relationships, only: [:new, :create, :edit, :update, :destroy]
     end
   end

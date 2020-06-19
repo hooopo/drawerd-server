@@ -15,6 +15,12 @@ function edit_relationship(url){
   modal.modal("toggle");
 }
 
+function edit_group(url){
+  modal = $('#edit-group');
+  modal.find('.modal-body').load(url);
+  modal.modal("toggle");
+}
+
 
 $(document).ready(function(){
   if($('#svg-object').length){

@@ -185,7 +185,7 @@ class Project < ApplicationRecord
     table2nodes = {}
     base_tables.group_by { |t| t.group }.each do |group, tables|
       if group
-        sub_graph = graph.add_graph("cluster#{group.id}", rankdir: "LR", bgcolor: group.color_with_default, compound: true)
+        sub_graph = graph.add_graph("cluster#{group.id}", rankdir: "LR", bgcolor: group.color_with_default, compound: true, href: "javascript:window.parent.edit_group('#{Rails.application.routes.url_helpers.edit_project_group_path(self, group)}');")
         sub_graph[:label] = group.name
         sub_graph[:style] = :dashed
         tables.each do |table|
