@@ -80,6 +80,10 @@ class ProjectsController < ApplicationController
     else
       @tables
     end
+
+    @tables = @tables.group_by { |t| t.group }.map do |group, tables|
+      tables.sort { |t| t.id }
+    end.flatten
   end
 
   def project_update_params

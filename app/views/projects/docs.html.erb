@@ -2,18 +2,18 @@
 <div class="container-fluid page__container">
 
   <div width='100%'>
-    <% @tables.order("id asc").each do |table| %>
-      <div class="card">
+    <% @tables.each do |table| %>
+      <div class="card mt-2">
         <div class="card-body">
           <h5 id="table-<%= table.id %>" class="card-title"><i class="material-icons icon-20pt">grid_on</i> &nbsp;&nbsp;<%= table.name %><small class="text-muted float-right"><%= table.comment %></small></h5>
           <table class="table table-borderless" style="background-color: <%= table.group&.color.presence || 'white' %>">
             <thead class="thead-light">
               <tr class="">
                 <th class="w-15">Name</th>
-                <th class="w-10">Column Type</th>
-                <th class="w-10">Ext Info</th>
-                <th class="w-10" >Ref</th>
-                <th class="w-10">Default</th>
+                <th class="w-15">Column Type</th>
+                <th class="w-15">Ext Info</th>
+                <th class="w-15" >Ref</th>
+                <th class="w-15">Default</th>
                 <th class="w-auto">Comment</th>
               </tr>
             </thead>
