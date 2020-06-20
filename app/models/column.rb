@@ -25,6 +25,7 @@
 
 class Column < ApplicationRecord
   belongs_to :table, touch: true
+  has_many :relationships, foreign_key: :relation_column_id
 
   TYPES = {
     postgresql: [
@@ -147,6 +148,21 @@ class Column < ApplicationRecord
     else
       ""
     end
+  end
+
+  def doc_desc
+    [table.name, name].join(".")
+  end
+
+  def ext_doc_info
+    null = if !nullable
+      "Not Null"
+    end
+
+    pk = if is_pk
+      "PK"
+    end
+    [pk, null].compact.map { |info| %Q|<span class="badge badge-info">#{info}</span>| }.join(" ")
   end
 
   def ext_info

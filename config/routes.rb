@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         get :render_svg
         get :render_sql
         get :columns
+        get :docs
       end
 
       resources :tables, only: [:new, :create, :destroy, :edit, :update]

@@ -72,6 +72,16 @@ class ProjectsController < ApplicationController
     render json: { columns: @columns }
   end
 
+  def docs
+    @project = current_company.projects.includes({ tables: [:columns, :group], relationships: [:column, :relation_column] }).find(params[:id])
+    @tables = @project.tables
+    @tables = if params[:group_id].present?
+      @tables.where(group_id: params[:group_id])
+    else
+      @tables
+    end
+  end
+
   def project_update_params
     params.fetch(:project, {}).permit(:bg_color, :table_header_color, :table_body_color, :arrow_color, :export_foreign_key)
   end

@@ -24,7 +24,8 @@
         <td><%= project.tables.count %></td>
         <td><%= project.created_at %></td>
         <td><%= link_to "Setting", edit_project_path(project), class: 'btn btn-sm btn-outline-secondary' %></td>
-        <td><%= link_to "Enter", project_path(project), class: 'btn btn-sm btn-outline-primary' %></td>
+        <td><%= link_to "Doc", docs_project_path(project), class: 'btn btn-sm btn-outline-dark' %></td>
+        <td><%= link_to "ERD", project_path(project), class: 'btn btn-sm btn-outline-primary' %></td>
       </tr>
     <% end %>
   </tbody>
