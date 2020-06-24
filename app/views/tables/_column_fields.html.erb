@@ -16,13 +16,13 @@
     </div>
 
     <div class="form-group form-group-sm col-md-1">
-      <%= f.label :nullable %>
-      <%= f.select :nullable, [true, false], {}, class: 'form-control form-control-sm' %>
+      <%= f.label :nullable %><br/>
+      <%= f.check_box :nullable, class: 'form-control-sm ' %>
     </div>
 
     <div class="form-group form-group-sm col-md-1">
-      <%= f.label :is_pk %>
-      <%= f.select :is_pk, [false, true], {}, class: 'form-control form-control-sm' %>
+      <%= f.label :is_pk %><br/>
+      <%= f.check_box :is_pk, class: 'form-control-sm' %>
     </div>
 
     <div class="form-group form-group-sm col-md-1">
