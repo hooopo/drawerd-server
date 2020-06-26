@@ -4,15 +4,17 @@
 #
 # Table name: columns
 #
-#  id          :bigint           not null, primary key
-#  column_type :string           default("string")
-#  comment     :string
-#  is_pk       :boolean          default(FALSE)
-#  name        :string
-#  nullable    :boolean          default(TRUE)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  table_id    :bigint
+#  id            :bigint           not null, primary key
+#  auto_incr     :boolean          default(FALSE)
+#  column_type   :string           default("string")
+#  comment       :string
+#  default_value :string
+#  is_pk         :boolean          default(FALSE)
+#  name          :string
+#  nullable      :boolean          default(TRUE)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  table_id      :bigint
 #
 # Indexes
 #

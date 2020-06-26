@@ -18,7 +18,7 @@ class GroupsController < ApplicationController
     @project = current_user.company.projects.find(params[:project_id])
     @group   = @project.groups.find(params[:id])
     if @group.update(params.fetch(:group, {}).permit(:name, :color))
-      render js: %Q|$('#edit-group').modal('toggle');window.location.reload();|
+      render js: "$('#edit-group').modal('toggle');window.location.reload();"
     else
       render js: %Q|alert("#{@group.errors.full_messages.join(", ")}");|
     end

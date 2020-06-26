@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_09_192020) do
+ActiveRecord::Schema.define(version: 2020_06_26_084955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2020_06_09_192020) do
     t.datetime "updated_at", null: false
     t.string "column_type", default: "string"
     t.boolean "is_pk", default: false
+    t.boolean "auto_incr", default: false
+    t.string "default_value"
     t.index ["table_id"], name: "index_columns_on_table_id"
   end
 

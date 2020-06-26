@@ -4,15 +4,17 @@
 #
 # Table name: columns
 #
-#  id          :bigint           not null, primary key
-#  column_type :string           default("string")
-#  comment     :string
-#  is_pk       :boolean          default(FALSE)
-#  name        :string
-#  nullable    :boolean          default(TRUE)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  table_id    :bigint
+#  id            :bigint           not null, primary key
+#  auto_incr     :boolean          default(FALSE)
+#  column_type   :string           default("string")
+#  comment       :string
+#  default_value :string
+#  is_pk         :boolean          default(FALSE)
+#  name          :string
+#  nullable      :boolean          default(TRUE)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  table_id      :bigint
 #
 # Indexes
 #
@@ -142,12 +144,21 @@ class Column < ApplicationRecord
     opt = []
     opt << "pk" if is_pk
     opt << "not null" if not nullable
+    opt << "increment" if auto_incr?
     opt << "note: #{comment.inspect}" if comment.present?
+    opt << "default: #{dbml_default}" if default_value.present?
     if opt.present?
       "[#{opt.join(", ")}]"
     else
       ""
     end
+  end
+
+  def dbml_default
+    return if default_value.blank?
+    return default_value if /\A`(.*?)`\z/.match?(default_value)
+    return default_value if /\A[0-9\.]+\z/.match?(default_value)
+    default_value.inspect
   end
 
   def doc_desc
@@ -159,10 +170,14 @@ class Column < ApplicationRecord
       "Not Null"
     end
 
+    incr = if auto_incr?
+      "Increment"
+    end
+
     pk = if is_pk
       "PK"
     end
-    [pk, null].compact.map { |info| %Q|<span class="badge badge-info">#{info}</span>| }.join(" ")
+    [pk, incr, null].compact.map { |info| %Q|<span class="badge badge-info">#{info}</span>| }.join(" ")
   end
 
   def ext_info
@@ -175,6 +190,10 @@ class Column < ApplicationRecord
       "pk"
     end
 
-    "[#{[null, pk].compact.join(", ")}]"
+    incr = if auto_incr?
+      "increment"
+    end
+
+    "[#{[pk, incr, null].compact.join(", ")}]"
   end
 end

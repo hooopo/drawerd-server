@@ -24,7 +24,7 @@
                   <td><%= column.column_type %></td>
                   <td><%= column.ext_doc_info.html_safe %></td>
                   <td><%= column.relationships.map {|rel| link_to rel.column.doc_desc, "#table-#{rel.table_id}" if rel.column }.compact.map{|link| "→ #{link}".html_safe }.join("<br>").html_safe %></td>
-                  <td></td>
+                  <td><%= column.default_value %></td>
                   <td><%= column.comment %></td>
                 </tr>
               <% end %>
