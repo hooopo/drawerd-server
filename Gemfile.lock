@@ -101,6 +101,8 @@ GEM
     concurrent-ruby (1.1.6)
     content_disposition (1.0.0)
     crass (1.0.5)
+    deep_cloneable (3.0.0)
+      activerecord (>= 3.1.0, < 7)
     dotenv (2.7.5)
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
@@ -328,6 +330,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   cocoon
+  deep_cloneable
   dotenv-rails (~> 2.7)
   drawerd
   dry-struct (~> 1.3)

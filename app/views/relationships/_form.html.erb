@@ -34,6 +34,12 @@
     <%= f.submit 'Submit', class: 'btn btn-success', data: {disable_with: 'waiting...'} %>
   </div>
 <% end %>
+<div>
+<p class="text-left"><span class="badge badge-light">users.id</span> (many)-> <span class="badge badge-light">posts.user_id</span></p>
+<p class="text-left"><span class="badge badge-light">users.id</span> (one)-> <span class="badge badge-light">profiles.user_id</span></p>
+<p class="text-left"><span class="badge badge-light">users.--</span> (m2m)-> <span class="badge badge-light">tags.--</span></p>
+</div>
+
 
 <script type="text/javascript">
   $(document).on("change", "#relationship_table_id, #relationship_relation_table_id", function(){
