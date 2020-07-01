@@ -17,9 +17,9 @@
                 <th class="w-auto">Comment</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="sortable">
               <% table.columns.order("sort asc, id asc").each do |column| %>
-                <tr>
+                <tr id="<%= column.sortable_id %>">
                   <td><%= column.name %></td>
                   <td><%= column.column_type %></td>
                   <td><%= column.ext_doc_info.html_safe %></td>
@@ -35,3 +35,12 @@
    <% end %>
   </div>
 </div>
+
+<% content_for :footer_scripts do %>
+  <script type="text/javascript">
+    $(function() {
+      $('.sortable').railsSortable();
+    });
+  </script> 
+<% end %>
+
