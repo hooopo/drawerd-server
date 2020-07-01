@@ -18,7 +18,7 @@
               </tr>
             </thead>
             <tbody>
-              <% table.columns.order("id asc").each do |column| %>
+              <% table.columns.order("sort asc, id asc").each do |column| %>
                 <tr>
                   <td><%= column.name %></td>
                   <td><%= column.column_type %></td>

@@ -17,8 +17,8 @@
   </div>
    
   <h5 class="modal-title">Add Columns</h5>
-  <div id='columns'>
-    <%= f.fields_for :columns, @table.columns.order("id asc") do |column| %>
+  <div id='columns' class="sortable">
+    <%= f.fields_for :columns, @table.columns.order("sort asc, id asc") do |column| %>
       <%= render 'column_fields', :f => column %>
     <% end %>
     <div class='form-group'>
@@ -33,3 +33,7 @@
     <%= f.submit 'Submit', class: 'btn btn-success', data: {disable_with: 'waiting...', remote: true} %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $('.sortable').railsSortable({items: "> .nested-fields"});
+</script>

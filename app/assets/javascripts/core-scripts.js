@@ -12,6 +12,9 @@
 //= require clipboard/dist/clipboard.min.js
 //= require bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js
 
+//= require jquery-ui/widgets/sortable
+//= require rails_sortable
+
 //** PLUGIN SCRIPTS (NODE_MODULES)
 // PRO ONLY
 

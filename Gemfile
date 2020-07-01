@@ -93,3 +93,5 @@ gem "php_serialize", "~> 1.2"
 
 
 gem "deep_cloneable"
+gem "jquery-ui-rails"
+gem "rails_sortable"
