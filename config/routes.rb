@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         get :render_sql
         get :columns
         get :docs
+        get :md
       end
 
       resources :tables, only: [:new, :create, :destroy, :edit, :update]

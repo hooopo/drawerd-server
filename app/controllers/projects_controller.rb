@@ -92,6 +92,11 @@ class ProjectsController < ApplicationController
     end.flatten
   end
 
+  def md
+    @project = current_company.projects.includes({ tables: [:columns, :group], relationships: [:column, :relation_column] }).find(params[:id])
+    render inline: MdGenerator.new(@project).to_md, layout: false, content_type: "application/text"
+  end
+
   def project_update_params
     params.fetch(:project, {}).permit(:bg_color, :table_header_color, :table_body_color, :arrow_color, :export_foreign_key)
   end

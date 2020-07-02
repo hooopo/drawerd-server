@@ -9,6 +9,7 @@
         <%= link_to 'Download', render_svg_project_path(@project, params.permit(:mode, :layout, :group_id, :mode).merge(download: true)), class: 'dropdown-item' %>
         <%= link_to 'Export SQL', render_sql_project_path(@project), class: 'dropdown-item' %>
         <%= link_to 'View Doc', docs_project_path(@project, params.permit(:group_id, :mode)), class: 'dropdown-item' %>
+        <%= link_to 'Markdown', md_project_path(@project, params.permit(:group_id, :mode)), class: 'dropdown-item' %>
       </div>
     </div>
 
