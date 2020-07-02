@@ -65,6 +65,12 @@ class ProjectsController < ApplicationController
     @project = current_user.company.projects.find(params[:id])
   end
 
+  def destroy
+    @project = current_user.company.projects.find(params[:id])
+    @project.deep_destroy
+    redirect_to projects_path
+  end
+
   def columns
     @project = current_user.company.projects.find(params[:id])
     @table   = @project.tables.find(params[:table_id])

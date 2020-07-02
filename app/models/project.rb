@@ -40,9 +40,9 @@ class Project < ApplicationRecord
   validates :name, presence: true
   belongs_to :user
   belongs_to :company, touch: true
-  has_many :tables
-  has_many :relationships
-  has_many :groups
+  has_many :tables, dependent: :destroy
+  has_many :relationships, dependent: :destroy
+  has_many :groups, dependent: :destroy
   include FileUploader::Attachment(:table_csv)
   include FileUploader::Attachment(:relation_csv)
 
@@ -234,5 +234,14 @@ class Project < ApplicationRecord
     path = Rails.root.join("tmp", "#{id}.svg")
     graph.output(svg: path)
     File.read(path)
+  end
+
+  def deep_destroy
+    ActiveRecord::Base.transaction do
+      relationships.delete_all
+      tables.each { |x| x.destroy }
+      groups.delete_all
+      destroy
+    end
   end
 end
