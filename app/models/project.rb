@@ -117,7 +117,10 @@ class Project < ApplicationRecord
       end
       CSV.parse(csv, **opt).each do |row|
         table = self.tables.where(name: row["table"], schema: row["schema"]).first
+        next unless table
+        
         column = table.columns.where(name: row["column"]).first
+        next unless column
 
         relation_table = self.tables.where(name: row["relation_table"], schema: row["relation_table_schema"]).first
         relation_column = relation_table.columns.where(name: row["relation_column"]).first

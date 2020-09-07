@@ -203,7 +203,7 @@ ActiveRecord::Schema.define(version: 2020_06_30_104455) do
   add_foreign_key "invitations", "companies"
   add_foreign_key "invitations", "users"
   add_foreign_key "invitations", "users", column: "invitee_id"
-  add_foreign_key "orders", "items", column: "item_code", primary_key: "item_code", name: "orders_item_code_fkey"
+  add_foreign_key "orders", "items", column: "item_code", primary_key: "item_code", name: "orders_item_code_item_name_fkey"
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users"
   add_foreign_key "purchases", "companies"
